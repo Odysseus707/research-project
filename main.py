@@ -1,8 +1,10 @@
 import pandas as pd
 import random
 from node import Node
+from node import create_nodes
 from orchestrator import Orchestrator
 from orchestrator import build_graph
+from greedy_orchestrator import GreedyOrchestrator
 import matplotlib.pyplot as plt
 import networkx as nx
 
@@ -14,68 +16,44 @@ global_features = ["precipitation", "temp_max", "temp_min", "wind"]
 n_samples = len(df)
 n_nodes = 32
 
-nodes = []
-
-for i in range(n_nodes):
-    owned = random.sample(
-        global_features,
-        random.randint(1, len(global_features))
-    )
-    nodes.append(Node(i, owned, n_samples))
-
-orch = Orchestrator(nodes, global_features)
-
-d_conn, d_bytes = orch.dumb_strategy()
-s_conn, s_bytes = orch.smart_strategy()
-
 p_values = [0.1, 0.2, 0.3, 0.4, 0.5]
+greed_values = [0.0, 0.25, 0.5, 0.75, 1.0]
 
-costs = []
-total_hops_list = []
+hop_results = {}
+byte_results = {}
 
-for p in p_values:
-    G = build_graph(n_nodes, p)
+for g in greed_values:
+    hop_curve = []
+    byte_curve = []
 
-    total_bytes, weighted_cost, total_hops = \
-        orch.smart_strategy_with_graph(G)
+    for p in p_values:
+        nodes = create_nodes(n_nodes, global_features, n_samples)
+        G = nx.erdos_renyi_graph(n_nodes, p)
 
-    costs.append(weighted_cost / 1e6)
-    total_hops_list.append(total_hops)
+        orch = GreedyOrchestrator(nodes, global_features)
 
-print("Dumb Strategy")
-print("Connections:", d_conn)
-print("Total MB:", d_bytes / 1e6)
+        total_hops, total_bytes, _ = orch.run(G, g)
 
-print("\nSmart Strategy")
-print("Connections:", s_conn)
-print("Total MB:", s_bytes / 1e6)
+        hop_curve.append(total_hops)
+        byte_curve.append(total_bytes / 1e6)
 
-strategies = ["Dumb", "Smart"]
-connections = [d_conn, s_conn]
-mb_transferred = [d_bytes / 1e6, s_bytes / 1e6]
+    hop_results[g] = hop_curve
+    byte_results[g] = byte_curve
 
-plt.figure()
-plt.bar(strategies, mb_transferred)
-plt.title("Total Communication (MB)")
-plt.ylabel("MB Transferred")
-plt.show()
+for g in greed_values:
+    plt.plot(p_values, hop_results[g])
 
-plt.figure()
-plt.bar(strategies, connections)
-plt.title("Total Connections")
-plt.ylabel("Number of Connections")
-plt.show()
-
-plt.figure()
-plt.plot(p_values, costs)
 plt.xlabel("Erdos-Renyi p")
-plt.ylabel("Weighted Communication (MB * hops)")
-plt.title("Communication vs Connectivity")
+plt.ylabel("Total Hops")
+plt.title("Total Hops vs p")
+plt.legend([f"g={g}" for g in greed_values])
 plt.show()
 
-plt.figure()
-plt.plot(p_values, total_hops_list)
+for g in greed_values:
+    plt.plot(p_values, byte_results[g])
+
 plt.xlabel("Erdos-Renyi p")
-plt.ylabel("Average Hops")
-plt.title("Average Hops vs Connectivity")
+plt.ylabel("Total Data (MB)")
+plt.title("Total Data Transmission vs p")
+plt.legend([f"g={g}" for g in greed_values])
 plt.show()
