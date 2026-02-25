@@ -1,57 +1,96 @@
 import networkx as nx
 
 class GreedyOrchestrator:
-    def __init__(self, nodes, global_features, bytes_per_value=8):
+    def __init__(self, nodes, global_features, global_timestamps, bytes_per_value=8):
         self.nodes = nodes
         self.global_features = global_features
+        self.global_timestamps = global_timestamps
         self.bytes_per_value = bytes_per_value
 
     def run(self, G, greed):
+
         total_hops = 0
         total_bytes = 0
-        total_features_acquired = 0
 
         for node in self.nodes:
 
-            missing = node.missing_features(self.global_features)
+            for feature in self.global_features:
 
-            for feature in missing:
+                remaining = node.missing_timestamps(
+                    feature,
+                    self.global_timestamps
+                )
 
-                best_choice = None
-                best_utility = float("-inf")
+                if not remaining:
+                    continue
 
-                for other in self.nodes:
-                    if other.node_id == node.node_id:
-                        continue
+                original_missing = len(remaining)
 
-                    if feature not in other.owned_features:
-                        continue
+                while remaining:
 
-                    try:
-                        hops = nx.shortest_path_length(
-                            G,
-                            node.node_id,
-                            other.node_id
+                    best_choice = None
+                    best_utility = float("-inf")
+
+                    for other in self.nodes:
+
+                        if other.node_id == node.node_id:
+                            continue
+
+                        other_data = other.owned_data.get(feature, set())
+                        overlap = remaining.intersection(other_data)
+
+                        if not overlap:
+                            continue
+
+                        try:
+                            hops = nx.shortest_path_length(
+                                G,
+                                node.node_id,
+                                other.node_id
+                            )
+                        except nx.NetworkXNoPath:
+                            continue
+
+                        coverage = len(overlap)
+
+                        utility = (
+                            greed * coverage
+                            - (1 - greed) * hops
                         )
-                    except nx.NetworkXNoPath:
-                        continue
 
-                    benefit = node.n_samples
-                    hop_cost = hops
+                        if utility > best_utility:
+                            best_utility = utility
+                            best_choice = (other, overlap, hops)
 
-                    utility = greed * benefit - (1 - greed) * hop_cost
+                    if best_choice and best_utility > 0:
 
-                    if utility > best_utility:
-                        best_utility = utility
-                        best_choice = (hops, benefit)
+                        other, overlap, hops = best_choice
 
-                if best_choice and best_utility > 0:
-                    hops, benefit = best_choice
+                        node.add_data(feature, overlap)
 
-                    bytes_needed = benefit * self.bytes_per_value
+                        remaining -= overlap
 
-                    total_hops += hops
-                    total_bytes += bytes_needed
-                    total_features_acquired += benefit
+                        total_hops += hops
+                        total_bytes += len(overlap) * self.bytes_per_value
 
-        return total_hops, total_bytes, total_features_acquired
+                    else:
+                        break
+
+        # compute global coverage
+        total_possible = (
+            len(self.nodes)
+            * len(self.global_features)
+            * len(self.global_timestamps)
+        )
+
+        total_owned = 0
+
+        for node in self.nodes:
+            for f in self.global_features:
+                total_owned += len(
+                    node.owned_data.get(f, set())
+                )
+
+        coverage_ratio = total_owned / total_possible
+
+        return total_hops, total_bytes, coverage_ratio
