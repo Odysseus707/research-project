@@ -1,18 +1,20 @@
 import random
 
 class Node:
-    def __init__(self, node_id, owned_data):
+    def __init__(self, node_id, features, timestamps):
         self.node_id = node_id
-        self.owned_data = owned_data  # dict: feature -> set(timestamps)
+        self.features = set(features)
+        self.timestamps = set(timestamps)
 
-    def missing_timestamps(self, feature, global_timestamps):
-        owned = self.owned_data.get(feature, set())
-        return global_timestamps - owned
+    def missing_features(self, global_features):
+        return set(global_features) - self.features
 
-    def add_data(self, feature, timestamps):
-        if feature not in self.owned_data:
-            self.owned_data[feature] = set()
-        self.owned_data[feature].update(timestamps)
+    def missing_timestamps(self, global_timestamps):
+        return set(global_timestamps) - self.timestamps
+
+    def add_data(self, new_features, new_timestamps):
+        self.features.update(new_features)
+        self.timestamps.update(new_timestamps)
 
 
 def create_nodes(n_nodes, global_features, global_timestamps):
@@ -20,25 +22,19 @@ def create_nodes(n_nodes, global_features, global_timestamps):
 
     for i in range(n_nodes):
 
-        owned_data = {}
-
-        # each node randomly owns some features
-        owned_features = random.sample(
+        features = random.sample(
             global_features,
             random.randint(1, len(global_features))
         )
 
-        for f in owned_features:
-            # randomly own some timestamps for that feature
-            ts_subset = set(random.sample(
-                list(global_timestamps),
-                random.randint(
-                    int(0.3 * len(global_timestamps)),
-                    len(global_timestamps)
-                )
-            ))
-            owned_data[f] = ts_subset
+        timestamps = set(random.sample(
+            list(global_timestamps),
+            random.randint(
+                int(0.3 * len(global_timestamps)),
+                len(global_timestamps)
+            )
+        ))
 
-        nodes.append(Node(i, owned_data))
+        nodes.append(Node(i, features, timestamps))
 
     return nodes

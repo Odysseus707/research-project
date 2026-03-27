@@ -1,0 +1,2 @@
+INFO:root:Hello, this is a log
+INFO:root:Did this work?
