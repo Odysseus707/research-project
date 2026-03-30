@@ -796,3 +796,1140 @@
 2026-03-27 15:14:24,526 | INFO | Orchestrator | Orchestrator selected nodes: [2] to cover modalities: {'temp_min', 'wind'}
 2026-03-27 15:14:24,527 | INFO | Orchestrator | Predicted weather: rain
 2026-03-27 15:14:24,527 | INFO | networkENV | Request fulfilled in 0.003316 seconds.
+2026-03-27 15:29:24,998 | INFO | networkENV | Tree generated with branching_factor=2, height=3, total_nodes=15
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 2: modalities={'temp_max'}, score=1, hops=1, utility=0.0
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 3: modalities={'temp_max', 'wind'}, score=2, hops=2, utility=0.0
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 4: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 6: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 7: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 9: modalities={'temp_max', 'wind'}, score=2, hops=3, utility=-0.5
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 11: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 12: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Selection path: Selected node 2 (covers {'temp_max'}, hops=1, utility=0.0) -> Selected node 3 (covers {'temp_max', 'wind'}, hops=2, utility=0.0)
+2026-03-27 15:29:25,009 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'temp_max', 'wind'}
+2026-03-27 15:29:25,010 | INFO | Orchestrator | Predicted weather: rain
+2026-03-27 15:29:26,575 | INFO | networkENV | Tree generated with branching_factor=2, height=4, total_nodes=31
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 1: modalities={'temp_max', 'wind'}, score=2, hops=1, utility=0.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 2: modalities={'wind'}, score=1, hops=1, utility=0.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 3: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 4: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 7: modalities={'temp_max', 'wind'}, score=2, hops=3, utility=-0.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 8: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 9: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 15: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 16: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 18: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 21: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 24: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 25: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Node 30: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Selection path: Selected node 1 (covers {'temp_max', 'wind'}, hops=1, utility=0.5)
+2026-03-27 15:29:26,592 | INFO | Orchestrator | Orchestrator selected nodes: [1] to cover modalities: {'temp_max', 'wind'}
+2026-03-27 15:29:26,593 | INFO | Orchestrator | Predicted weather: sun
+2026-03-27 15:29:26,616 | INFO | networkENV | Tree generated with branching_factor=2, height=5, total_nodes=63
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 4: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 5: modalities={'wind', 'precipitation'}, score=2, hops=2, utility=0.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 7: modalities={'wind', 'precipitation'}, score=2, hops=3, utility=-0.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 8: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 9: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 10: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 12: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 15: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 16: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 18: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 20: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 21: modalities={'wind', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 23: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 24: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 25: modalities={'wind', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 27: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 28: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 30: modalities={'wind', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 31: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 32: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 33: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 34: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 35: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 36: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 37: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 38: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 40: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 41: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 42: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 43: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 44: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 46: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 48: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 49: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 50: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 51: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 53: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 54: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 55: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 56: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,645 | INFO | Orchestrator | Node 57: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Node 58: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Node 59: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Node 60: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Node 61: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Node 62: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Selection path: Selected node 5 (covers {'wind', 'precipitation'}, hops=2, utility=0.0)
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Orchestrator selected nodes: [5] to cover modalities: {'wind', 'precipitation'}
+2026-03-27 15:29:26,646 | INFO | Orchestrator | Predicted weather: rain
+2026-03-27 15:29:26,672 | INFO | networkENV | Tree generated with branching_factor=2, height=5, total_nodes=63
+2026-03-27 15:29:26,702 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-27 15:29:26,702 | INFO | Orchestrator | Node 1: modalities={'wind'}, score=1, hops=1, utility=0.0
+2026-03-27 15:29:26,702 | INFO | Orchestrator | Node 3: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,702 | INFO | Orchestrator | Node 5: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,702 | INFO | Orchestrator | Node 9: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,702 | INFO | Orchestrator | Node 10: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,702 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 12: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 15: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 16: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 17: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 18: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 21: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 22: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 23: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 24: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 25: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 26: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 27: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 30: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 31: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 33: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 34: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 35: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 36: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 37: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 38: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 39: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 40: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 41: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 43: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 44: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 45: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 46: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 48: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 51: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 52: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 53: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 54: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 55: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 56: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 57: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 58: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 59: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 60: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Node 61: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Selection path: Selected node 1 (covers {'wind'}, hops=1, utility=0.0) -> Selected node 9 (covers {'temp_max'}, hops=3, utility=-1.0)
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Orchestrator selected nodes: [1, 9] to cover modalities: {'temp_max', 'wind'}
+2026-03-27 15:29:26,703 | INFO | Orchestrator | Predicted weather: rain
+2026-03-27 15:29:26,729 | INFO | networkENV | Tree generated with branching_factor=2, height=6, total_nodes=127
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 2: modalities={'temp_min'}, score=1, hops=1, utility=0.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 3: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 4: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 5: modalities={'temp_min'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 6: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 7: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 9: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 10: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 12: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 13: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 15: modalities={'wind', 'temp_min'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 16: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 18: modalities={'wind', 'temp_min'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 20: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 21: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 23: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 24: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 25: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 26: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 27: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 28: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 30: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 31: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 32: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 33: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 34: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 36: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 37: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 38: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 39: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 41: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 42: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 44: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 45: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 48: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 49: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 50: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 51: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 53: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 55: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 56: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 58: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 59: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 60: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 61: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 62: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 63: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 64: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 65: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 66: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 67: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 68: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 69: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 71: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 72: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 73: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 74: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 75: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 76: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 77: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 78: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 79: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 80: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 81: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 82: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,783 | INFO | Orchestrator | Node 83: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 84: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 85: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 86: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 87: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 88: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 89: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 90: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 91: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 92: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 93: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 94: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 95: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 97: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 98: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 99: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 100: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 101: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 102: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 103: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 104: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 105: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 106: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 107: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 108: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 109: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 110: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 111: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 113: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 114: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 115: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 117: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 118: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 120: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 121: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 122: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 123: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 124: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 125: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Node 126: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Selection path: Selected node 2 (covers {'temp_min'}, hops=1, utility=0.0) -> Selected node 3 (covers {'wind'}, hops=2, utility=-0.5)
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'wind', 'temp_min'}
+2026-03-27 15:29:26,784 | INFO | Orchestrator | Predicted weather: sun
+2026-03-27 15:29:26,817 | INFO | networkENV | Tree generated with branching_factor=2, height=6, total_nodes=127
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 3: modalities={'precipitation'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 4: modalities={'temp_max', 'precipitation'}, score=2, hops=2, utility=0.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 5: modalities={'temp_max', 'precipitation'}, score=2, hops=2, utility=0.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 6: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 7: modalities={'temp_max', 'precipitation'}, score=2, hops=3, utility=-0.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 9: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 10: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 11: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 12: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 13: modalities={'temp_max', 'precipitation'}, score=2, hops=3, utility=-0.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 14: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 16: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 17: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 19: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 20: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 21: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 22: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 23: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 24: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 25: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 26: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 28: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 30: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 32: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 33: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 34: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 35: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 37: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 38: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 39: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 40: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 41: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 42: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 44: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 45: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 46: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 47: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 48: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 49: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 50: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 51: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 52: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 53: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 54: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 55: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 56: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 58: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 59: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 60: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 61: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 62: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 64: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 65: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 66: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 67: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 68: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 69: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 70: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 71: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 72: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 73: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 76: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 77: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 78: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 79: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 80: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 81: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 82: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 83: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 84: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 88: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 89: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 90: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 91: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 92: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 93: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 94: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 96: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 97: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 98: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 99: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 100: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 101: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 102: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 103: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 104: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 105: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 106: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 107: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 108: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 110: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 111: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 112: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,871 | INFO | Orchestrator | Node 113: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 114: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 116: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 117: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 118: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 119: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 121: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 123: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 124: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 125: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Node 126: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Selection path: Selected node 4 (covers {'temp_max', 'precipitation'}, hops=2, utility=0.0)
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Orchestrator selected nodes: [4] to cover modalities: {'temp_max', 'precipitation'}
+2026-03-27 15:29:26,872 | INFO | Orchestrator | Predicted weather: sun
+2026-03-30 12:31:50,909 | INFO | networkENV | Tree generated with branching_factor=2, height=3, total_nodes=15
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 2: modalities={'temp_max'}, score=1, hops=1, utility=0.0
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 3: modalities={'temp_max', 'wind'}, score=2, hops=2, utility=0.0
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 4: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 6: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 7: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 9: modalities={'temp_max', 'wind'}, score=2, hops=3, utility=-0.5
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 11: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 12: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Selection path: Selected node 2 (covers {'temp_max'}, hops=1, utility=0.0) -> Selected node 3 (covers {'temp_max', 'wind'}, hops=2, utility=0.0)
+2026-03-30 12:31:50,921 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'temp_max', 'wind'}
+2026-03-30 12:31:50,922 | INFO | Orchestrator | Predicted weather: rain
+2026-03-30 12:31:52,569 | INFO | networkENV | Tree generated with branching_factor=2, height=4, total_nodes=31
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 1: modalities={'temp_max', 'wind'}, score=2, hops=1, utility=0.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 2: modalities={'wind'}, score=1, hops=1, utility=0.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 3: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 4: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 7: modalities={'temp_max', 'wind'}, score=2, hops=3, utility=-0.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 8: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 9: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 15: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 16: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 18: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 21: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 24: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 25: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Node 30: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Selection path: Selected node 1 (covers {'temp_max', 'wind'}, hops=1, utility=0.5)
+2026-03-30 12:31:52,588 | INFO | Orchestrator | Orchestrator selected nodes: [1] to cover modalities: {'temp_max', 'wind'}
+2026-03-30 12:31:52,589 | INFO | Orchestrator | Predicted weather: rain
+2026-03-30 12:31:52,615 | INFO | networkENV | Tree generated with branching_factor=2, height=5, total_nodes=63
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 4: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 5: modalities={'wind', 'precipitation'}, score=2, hops=2, utility=0.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 7: modalities={'wind', 'precipitation'}, score=2, hops=3, utility=-0.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 8: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 9: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 10: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 12: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 15: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 16: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 18: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 20: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 21: modalities={'wind', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 23: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 24: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 25: modalities={'wind', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 27: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 28: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 30: modalities={'wind', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 31: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 32: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 33: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 34: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 35: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 36: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 37: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 38: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 40: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 41: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 42: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 43: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 44: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 46: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 48: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 49: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 50: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 51: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 53: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 54: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 55: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 56: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 57: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 58: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 59: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 60: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 61: modalities={'wind', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Node 62: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Selection path: Selected node 5 (covers {'wind', 'precipitation'}, hops=2, utility=0.0)
+2026-03-30 12:31:52,647 | INFO | Orchestrator | Orchestrator selected nodes: [5] to cover modalities: {'wind', 'precipitation'}
+2026-03-30 12:31:52,648 | INFO | Orchestrator | Predicted weather: rain
+2026-03-30 12:31:52,676 | INFO | networkENV | Tree generated with branching_factor=2, height=5, total_nodes=63
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 1: modalities={'wind'}, score=1, hops=1, utility=0.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 3: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 5: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 9: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 10: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 12: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 15: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 16: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 17: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 18: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 21: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 22: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 23: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 24: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 25: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 26: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 27: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 30: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 31: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 33: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 34: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 35: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 36: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 37: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 38: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 39: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 40: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 41: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 43: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 44: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 45: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 46: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 48: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 51: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 52: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 53: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 54: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 55: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 56: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,740 | INFO | Orchestrator | Node 57: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,741 | INFO | Orchestrator | Node 58: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,741 | INFO | Orchestrator | Node 59: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,741 | INFO | Orchestrator | Node 60: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,741 | INFO | Orchestrator | Node 61: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,741 | INFO | Orchestrator | Selection path: Selected node 1 (covers {'wind'}, hops=1, utility=0.0) -> Selected node 9 (covers {'temp_max'}, hops=3, utility=-1.0)
+2026-03-30 12:31:52,741 | INFO | Orchestrator | Orchestrator selected nodes: [1, 9] to cover modalities: {'temp_max', 'wind'}
+2026-03-30 12:31:52,741 | INFO | Orchestrator | Predicted weather: rain
+2026-03-30 12:31:52,768 | INFO | networkENV | Tree generated with branching_factor=2, height=6, total_nodes=127
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 2: modalities={'temp_min'}, score=1, hops=1, utility=0.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 3: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 4: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 5: modalities={'temp_min'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 6: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 7: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 9: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 10: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 12: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 13: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 15: modalities={'wind', 'temp_min'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 16: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 18: modalities={'wind', 'temp_min'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 20: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 21: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 23: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 24: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 25: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 26: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 27: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 28: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 30: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 31: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 32: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 33: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 34: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 36: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 37: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 38: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 39: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 41: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 42: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 44: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 45: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 48: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 49: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 50: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 51: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 53: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 55: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 56: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 58: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 59: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 60: modalities={'wind', 'temp_min'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 61: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 62: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 63: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 64: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 65: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 66: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 67: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 68: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 69: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 71: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 72: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 73: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 74: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 75: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 76: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 77: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 78: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 79: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 80: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 81: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 82: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 83: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 84: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 85: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 86: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 87: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 88: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 89: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,823 | INFO | Orchestrator | Node 90: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 91: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 92: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 93: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 94: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 95: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 97: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 98: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 99: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 100: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 101: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 102: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 103: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 104: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 105: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 106: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 107: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 108: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 109: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 110: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 111: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 113: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 114: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 115: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 117: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 118: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 120: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 121: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 122: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 123: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 124: modalities={'wind', 'temp_min'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 125: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Node 126: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Selection path: Selected node 2 (covers {'temp_min'}, hops=1, utility=0.0) -> Selected node 3 (covers {'wind'}, hops=2, utility=-0.5)
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'wind', 'temp_min'}
+2026-03-30 12:31:52,824 | INFO | Orchestrator | Predicted weather: rain
+2026-03-30 12:31:52,858 | INFO | networkENV | Tree generated with branching_factor=2, height=6, total_nodes=127
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 3: modalities={'precipitation'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 4: modalities={'temp_max', 'precipitation'}, score=2, hops=2, utility=0.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 5: modalities={'temp_max', 'precipitation'}, score=2, hops=2, utility=0.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 6: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 7: modalities={'temp_max', 'precipitation'}, score=2, hops=3, utility=-0.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 9: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 10: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 11: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 12: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 13: modalities={'temp_max', 'precipitation'}, score=2, hops=3, utility=-0.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 14: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 16: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 17: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 19: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 20: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 21: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 22: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 23: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 24: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,913 | INFO | Orchestrator | Node 25: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 26: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 28: modalities={'temp_max', 'precipitation'}, score=2, hops=4, utility=-1.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 30: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 32: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 33: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 34: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 35: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 37: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 38: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 39: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 40: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 41: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 42: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 44: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 45: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 46: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 47: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 48: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 49: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 50: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 51: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 52: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 53: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 54: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 55: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 56: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 58: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 59: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 60: modalities={'temp_max', 'precipitation'}, score=2, hops=5, utility=-1.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 61: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 62: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 64: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 65: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 66: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 67: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 68: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 69: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 70: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 71: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 72: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 73: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 76: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 77: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 78: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 79: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 80: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 81: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 82: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 83: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 84: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 88: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 89: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 90: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 91: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 92: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 93: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 94: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 96: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 97: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 98: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 99: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 100: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 101: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 102: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 103: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 104: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 105: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 106: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 107: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 108: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 110: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 111: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 112: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 113: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 114: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 116: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 117: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 118: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 119: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 121: modalities={'temp_max', 'precipitation'}, score=2, hops=6, utility=-2.0
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 123: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 124: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 125: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Node 126: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Selection path: Selected node 4 (covers {'temp_max', 'precipitation'}, hops=2, utility=0.0)
+2026-03-30 12:31:52,914 | INFO | Orchestrator | Orchestrator selected nodes: [4] to cover modalities: {'temp_max', 'precipitation'}
+2026-03-30 12:31:52,915 | INFO | Orchestrator | Predicted weather: sun
+2026-03-30 13:53:29,409 | INFO | networkENV | Tree generated with branching_factor=2, height=3, total_nodes=15
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 2: modalities={'temp_max'}, score=1, hops=1, utility=0.0
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 3: modalities={'temp_max', 'wind'}, score=2, hops=2, utility=0.0
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 4: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 6: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 7: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 9: modalities={'temp_max', 'wind'}, score=2, hops=3, utility=-0.5
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 11: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 12: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Selection path: Selected node 2 (covers {'temp_max'}, hops=1, utility=0.0) -> Selected node 3 (covers {'temp_max', 'wind'}, hops=2, utility=0.0)
+2026-03-30 13:53:29,420 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'temp_max', 'wind'}
+2026-03-30 13:53:29,421 | INFO | Orchestrator | Predicted weather: sun
+2026-03-30 13:53:30,713 | INFO | networkENV | Tree generated with branching_factor=2, height=4, total_nodes=31
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 1: modalities={'temp_max', 'wind'}, score=2, hops=1, utility=0.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 2: modalities={'wind'}, score=1, hops=1, utility=0.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 3: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 4: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 7: modalities={'temp_max', 'wind'}, score=2, hops=3, utility=-0.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 8: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 9: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 15: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 16: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 18: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 21: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 24: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 25: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Node 30: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,730 | INFO | Orchestrator | Selection path: Selected node 1 (covers {'temp_max', 'wind'}, hops=1, utility=0.5)
+2026-03-30 13:53:30,731 | INFO | Orchestrator | Orchestrator selected nodes: [1] to cover modalities: {'temp_max', 'wind'}
+2026-03-30 13:53:30,731 | INFO | Orchestrator | Predicted weather: rain
+2026-03-30 13:53:30,757 | INFO | networkENV | Tree generated with branching_factor=2, height=5, total_nodes=63
+2026-03-30 13:53:30,786 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 13:53:30,786 | INFO | Orchestrator | Node 4: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,786 | INFO | Orchestrator | Node 5: modalities={'precipitation', 'wind'}, score=2, hops=2, utility=0.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 7: modalities={'precipitation', 'wind'}, score=2, hops=3, utility=-0.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 8: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 9: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 10: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 12: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 15: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 16: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 18: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 20: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 21: modalities={'precipitation', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 23: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 24: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 25: modalities={'precipitation', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 27: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 28: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 30: modalities={'precipitation', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 31: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 32: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 33: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 34: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 35: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 36: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 37: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 38: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 40: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 41: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 42: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 43: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 44: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 46: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 48: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 49: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 50: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 51: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 53: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 54: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 55: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 56: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 57: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 58: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 59: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 60: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 61: modalities={'precipitation', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Node 62: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Selection path: Selected node 5 (covers {'precipitation', 'wind'}, hops=2, utility=0.0)
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Orchestrator selected nodes: [5] to cover modalities: {'precipitation', 'wind'}
+2026-03-30 13:53:30,787 | INFO | Orchestrator | Predicted weather: sun
+2026-03-30 13:53:30,815 | INFO | networkENV | Tree generated with branching_factor=2, height=5, total_nodes=63
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Node 1: modalities={'wind'}, score=1, hops=1, utility=0.0
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Node 3: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Node 5: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Node 9: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Node 10: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,846 | INFO | Orchestrator | Node 12: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 15: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 16: modalities={'wind', 'temp_max'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 17: modalities={'wind', 'temp_max'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 18: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 21: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 22: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 23: modalities={'temp_max', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 24: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 25: modalities={'wind', 'temp_max'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 26: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 27: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 30: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 31: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 33: modalities={'wind', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 34: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 35: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 36: modalities={'wind', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 37: modalities={'wind', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 38: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 39: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 40: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 41: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 43: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 44: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 45: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 46: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 48: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 51: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 52: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 53: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 54: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 55: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 56: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 57: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 58: modalities={'temp_max', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 59: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 60: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Node 61: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Selection path: Selected node 1 (covers {'wind'}, hops=1, utility=0.0) -> Selected node 9 (covers {'temp_max'}, hops=3, utility=-1.0)
+2026-03-30 13:53:30,847 | INFO | Orchestrator | Orchestrator selected nodes: [1, 9] to cover modalities: {'temp_max', 'wind'}
+2026-03-30 13:53:30,848 | INFO | Orchestrator | Predicted weather: rain
+2026-03-30 13:53:30,874 | INFO | networkENV | Tree generated with branching_factor=2, height=6, total_nodes=127
+2026-03-30 13:53:30,927 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 2: modalities={'temp_min'}, score=1, hops=1, utility=0.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 3: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 4: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 5: modalities={'temp_min'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 6: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 7: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 9: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 10: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 11: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 12: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 13: modalities={'temp_min'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 15: modalities={'temp_min', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 16: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 17: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 18: modalities={'temp_min', 'wind'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 19: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 20: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 21: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 22: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 23: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 24: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 25: modalities={'temp_min'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 26: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 27: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 28: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 29: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 30: modalities={'wind'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 31: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 32: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 33: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 34: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 36: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 37: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 38: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 39: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 41: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 42: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 44: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 45: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 47: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 48: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 49: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 50: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 51: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 53: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 55: modalities={'temp_min'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 56: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 58: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 59: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 60: modalities={'temp_min', 'wind'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 61: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 62: modalities={'wind'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 63: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 64: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 65: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 66: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 67: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 68: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 69: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 71: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 72: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 73: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 74: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 75: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 76: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 77: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 78: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 79: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 80: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 81: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 82: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 83: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 84: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 85: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 86: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 87: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 88: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 89: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 90: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 91: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 92: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 93: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 94: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 95: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 97: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 98: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 99: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 100: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 101: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 102: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 103: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 104: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 105: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 106: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 107: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 108: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 109: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 110: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 111: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 113: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 114: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 115: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 117: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 118: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 120: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 121: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 122: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 123: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 124: modalities={'temp_min', 'wind'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 125: modalities={'temp_min'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,928 | INFO | Orchestrator | Node 126: modalities={'wind'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:30,929 | INFO | Orchestrator | Selection path: Selected node 2 (covers {'temp_min'}, hops=1, utility=0.0) -> Selected node 3 (covers {'wind'}, hops=2, utility=-0.5)
+2026-03-30 13:53:30,929 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'temp_min', 'wind'}
+2026-03-30 13:53:30,929 | INFO | Orchestrator | Predicted weather: sun
+2026-03-30 13:53:30,963 | INFO | networkENV | Tree generated with branching_factor=2, height=6, total_nodes=127
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Candidate nodes and scores:
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 3: modalities={'precipitation'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 4: modalities={'precipitation', 'temp_max'}, score=2, hops=2, utility=0.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 5: modalities={'precipitation', 'temp_max'}, score=2, hops=2, utility=0.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 6: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 7: modalities={'precipitation', 'temp_max'}, score=2, hops=3, utility=-0.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 9: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 10: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 11: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 12: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 13: modalities={'precipitation', 'temp_max'}, score=2, hops=3, utility=-0.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 14: modalities={'precipitation'}, score=1, hops=3, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 16: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 17: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 19: modalities={'precipitation', 'temp_max'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 20: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 21: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 22: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 23: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 24: modalities={'temp_max'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 25: modalities={'precipitation', 'temp_max'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 26: modalities={'precipitation', 'temp_max'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 28: modalities={'precipitation', 'temp_max'}, score=2, hops=4, utility=-1.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 30: modalities={'precipitation'}, score=1, hops=4, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 32: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 33: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 34: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 35: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 37: modalities={'precipitation', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 38: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 39: modalities={'precipitation', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 40: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 41: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 42: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 44: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 45: modalities={'precipitation', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 46: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 47: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 48: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 49: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 50: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 51: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 52: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 53: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 54: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 55: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 56: modalities={'precipitation', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 58: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 59: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 60: modalities={'precipitation', 'temp_max'}, score=2, hops=5, utility=-1.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 61: modalities={'temp_max'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 62: modalities={'precipitation'}, score=1, hops=5, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 64: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 65: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 66: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 67: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 68: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 69: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 70: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 71: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 72: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 73: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 76: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 77: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 78: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 79: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 80: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 81: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 82: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 83: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 84: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 88: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 89: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 90: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 91: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 92: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 93: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,017 | INFO | Orchestrator | Node 94: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 96: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 97: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 98: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 99: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 100: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 101: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 102: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 103: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 104: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 105: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 106: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 107: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 108: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 110: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 111: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 112: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 113: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 114: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 116: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 117: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 118: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 119: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 121: modalities={'precipitation', 'temp_max'}, score=2, hops=6, utility=-2.0
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 123: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 124: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 125: modalities={'precipitation'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Node 126: modalities={'temp_max'}, score=1, hops=6, utility=-2.5
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Selection path: Selected node 4 (covers {'precipitation', 'temp_max'}, hops=2, utility=0.0)
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Orchestrator selected nodes: [4] to cover modalities: {'precipitation', 'temp_max'}
+2026-03-30 13:53:31,018 | INFO | Orchestrator | Predicted weather: rain

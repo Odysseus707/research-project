@@ -44,6 +44,8 @@ def solve_ilp(nodes, global_features, tree, greed_param=0.5):
         for e in edges_in_path:
             prob += x[v] <= y[e]
 
+    prob.writeLP("ILP_Model.lp")
+
     # Binary constraints are already set by cat='Binary'
     # Solve
     prob.solve()
