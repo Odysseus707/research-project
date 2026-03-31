@@ -22,6 +22,7 @@ def main():
 	env.logger.info(msg1)
 	start_time = time.time()
 	env.orchestrator.handle_request(random_node.node_id, timestamp, present_modalities)
+	# env.orchestrator.handle_request_with_random(present_modalities)
 	# Prediction is now handled inside orchestrator.handle_request
 	elapsed = time.time() - start_time
 	msg2 = f"Request fulfilled in {elapsed:.6f} seconds."

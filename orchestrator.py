@@ -1,9 +1,11 @@
 import logging
+import random
 from model import SimpleWeatherModel
 import networkx as nx
 import joblib
 
 class Orchestrator:
+
     def __init__(self, nodes, global_features, tree=None, greed_param=0.5):
         self.nodes = nodes
         self.global_features = global_features
@@ -38,6 +40,33 @@ class Orchestrator:
         X = np.array(features).reshape(1, -1)
         pred = self.weather_model.predict(X)
         return self.label_encoder.inverse_transform(pred)[0]
+    
+    def handle_request_with_random(self, present_modalities=None):
+        """
+        Randomly select nodes in any order until all global features are covered.
+        Returns the list of selected node ids.
+        Logs the path (order) of selected nodes.
+        """
+        if present_modalities is None:
+            present_modalities = set()
+        required_modalities = set(self.global_features)
+        selected_nodes = []
+        covered = set(present_modalities)
+        node_ids = [node.node_id for node in self.nodes]
+        random.shuffle(node_ids)
+        for node_id in node_ids:
+            node = next((n for n in self.nodes if n.node_id == node_id), None)
+            if node is None:
+                continue
+            node_feats = set(node.features)
+            if not (node_feats - covered):
+                continue
+            selected_nodes.append(node_id)
+            covered.update(node_feats)
+            if covered >= required_modalities:
+                break
+        self.logger.info(f"Random selection path: {selected_nodes}")
+        return selected_nodes
 
     def handle_request(self, requesting_node_id, timestamp, present_modalities):
         """
