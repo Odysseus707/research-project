@@ -6,6 +6,7 @@ from ilp_solver import solve_ilp
 
 # For reproducibility
 import random
+
 random.seed(42)
 
 # Parameters
@@ -25,7 +26,9 @@ for num_nodes in node_counts:
     assign_data(env.nodes)
     # Orchestrator timing (Greedy)
     random_node = random.choice(env.nodes)
-    timestamp = random.choice(list(random_node.timestamps)) if random_node.timestamps else None
+    timestamp = (
+        random.choice(list(random_node.timestamps)) if random_node.timestamps else None
+    )
     present_modalities = set(random_node.features)
     start = time.time()
     env.orchestrator.handle_request(random_node.node_id, timestamp, present_modalities)
@@ -41,14 +44,14 @@ for num_nodes in node_counts:
 
 # Plotting
 plt.figure(figsize=(8, 5))
-plt.plot(node_counts, orchestrator_times, marker='o', label='Orchestrator (Greedy)')
-plt.plot(node_counts, ilp_times, marker='s', label='ILP Solver')
-plt.plot(node_counts, random_times, marker='^', label='Random Orchestrator')
-plt.xlabel('Number of Nodes in Tree')
-plt.ylabel('Time to Solve (seconds)')
-plt.title('Orchestrator (Greedy) vs ILP vs Random Runtime')
+plt.plot(node_counts, orchestrator_times, marker="o", label="Orchestrator (Greedy)")
+plt.plot(node_counts, ilp_times, marker="s", label="ILP Solver")
+plt.plot(node_counts, random_times, marker="^", label="Random Orchestrator")
+plt.xlabel("Number of Nodes in Tree")
+plt.ylabel("Time to Solve (seconds)")
+plt.title("Orchestrator (Greedy) vs ILP vs Random Runtime")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig('runtime_comparison.png')
+plt.savefig("runtime_comparison.png")
 plt.show()

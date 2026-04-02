@@ -1,5 +1,7 @@
-import random
 import csv
+import random
+
+
 class Node:
     def __init__(self, node_id, features, timestamps, data=None):
         self.node_id = node_id
@@ -19,23 +21,40 @@ class Node:
         self.timestamps.update(new_timestamps)
 
 
-
-def create_nodes(n_nodes, global_features, global_timestamps, n_timestamps_per_node=20, max_features_per_timestamp=2):
+def create_nodes(
+    n_nodes,
+    global_features,
+    global_timestamps,
+    n_timestamps_per_node=20,
+    max_features_per_timestamp=2,
+):
     """
     Each node gets ~20 random timestamps, and for each timestamp, at most 2 random features.
     Returns a list of Node objects with .data = {timestamp: set(features)}
     """
     # Remove 'weather' if present
-    features_clean = [f for f in global_features if f != 'weather']
+    features_clean = [f for f in global_features if f != "weather"]
     nodes = []
     for i in range(n_nodes):
-        timestamps = random.sample(list(global_timestamps), min(n_timestamps_per_node, len(global_timestamps)))
-        feats = set(random.sample(features_clean, min(max_features_per_timestamp, len(features_clean))))
+        timestamps = random.sample(
+            list(global_timestamps), min(n_timestamps_per_node, len(global_timestamps))
+        )
+        feats = set(
+            random.sample(
+                features_clean, min(max_features_per_timestamp, len(features_clean))
+            )
+        )
         data = {t: set(feats) for t in timestamps}
         nodes.append(Node(i, feats, set(timestamps), data=data))
     return nodes
 
-def assign_data(nodes, csv_path="seattle-weather.csv", n_timestamps_per_node=20, max_features_per_timestamp=2):
+
+def assign_data(
+    nodes,
+    csv_path="seattle-weather.csv",
+    n_timestamps_per_node=20,
+    max_features_per_timestamp=2,
+):
     """
     Assigns sparse data to a list of Node objects using real timestamps and features from a CSV file.
     Each node gets ~20 random timestamps, and for each timestamp, at most 2 random features.
@@ -48,8 +67,11 @@ def assign_data(nodes, csv_path="seattle-weather.csv", n_timestamps_per_node=20,
 
     n_nodes = len(nodes)
     from random import sample
+
     for i, node in enumerate(nodes):
-        node_timestamps = sample(all_timestamps, min(n_timestamps_per_node, len(all_timestamps)))
+        node_timestamps = sample(
+            all_timestamps, min(n_timestamps_per_node, len(all_timestamps))
+        )
         feats = set(sample(features, min(max_features_per_timestamp, len(features))))
         data = {}
         for t in node_timestamps:

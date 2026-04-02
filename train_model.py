@@ -19,6 +19,7 @@ def train_weather_model_from_csv(csv_path="seattle-weather.csv"):
     model.train(X, y_encoded)
     return model, le
 
+
 if __name__ == "__main__":
     model, le = train_weather_model_from_csv()
     model.save("weather_model.joblib")
