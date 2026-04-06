@@ -38,9 +38,9 @@ def random_algorithm(
                     total_cost += cost(hops, w)
                 needed -= new_modalities
                 found = True
-                break  
+                break
         if not found:
-            break 
+            break
         node_list = rng.permutation(node_list).tolist()
 
     return list(selected_nodes), total_cost

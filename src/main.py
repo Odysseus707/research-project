@@ -7,6 +7,5 @@ for num_requests in [10, 100, 1000, ...]:
                 rng = create_rng(seed)
                 env = create_env(rng)
                 for alg in [proposed_algorithm, random_algorithm]:
-                    simulate(env, alg)
-
+                    simulate(env, alg)  # TODO: Implement this first.
 """

@@ -38,31 +38,50 @@ def partition_dataset(
     return partitions
 
 
+def create_tree(g: nx.Graph, orchestrator_idx: int | None = None):
+    if orchestrator_idx is None:
+        orchestrator_idx = 0
+
+    tree = nx.bfs_tree(g, source=orchestrator_idx)
+
+    for node, node_data in tree.nodes(data=True):
+        if node == orchestrator_idx:
+            node_data["type"] = "orchestrator"
+        elif nx.degree(g, node) > 1:
+            node_data["type"] = "forwarder"
+        else:
+            node_data["type"] = "worker"
+
+    return tree
+
+
 def random_env(
     dataset: pd.DataFrame,
     num_nodes: int,
-    topo: nx.Graph,
+    graph: nx.Graph,
     seed: Generator | int | None = None,
 ) -> Env:
     rng = create_rng(seed)
+    tree = create_tree(graph)
 
     nodes = []
-    for idx in range(num_nodes):
+    for node_idx, node_data in tree.nodes(data=True):
+        if node_data["type"] != "worker":
+            continue
+
         node_modalities = ...
         node_timestamps = ...
-        node_data = dataset
-        nodes.append(Node(idx=idx, data=node_data))
+        node_dataset = partition_data(dataset, ...)
+        nodes.append(Node(idx=node_idx, data=node_dataset))
 
-    orchestrator = ...
-    topo = topo
+    # orchestrator = ...
     timestamps = ...  # TODO: Get these from the dataframe itself
     modalities = ...  # TODO: Get these from the dataframe itself or via arg
-    ...
 
     return Env(
         nodes=nodes,
-        orchestator=orchestrator,
-        topo=topo,
+        # orchestator=orchestrator,
+        topo=tree,
         timestamps=timestamps,
         modalities=modalities,
     )
