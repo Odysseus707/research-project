@@ -3,7 +3,6 @@ from __future__ import annotations
 import typing as t
 import networkx as nx
 from system import Node, Env, Request
-import random
 from src.random import create_rng
 
 
@@ -39,9 +38,9 @@ def random_algorithm(
                     total_cost += cost(hops, w)
                 needed -= new_modalities
                 found = True
-                break  # Pick one node at a time, then reshuffle
+                break  
         if not found:
-            break  # No more nodes can provide needed modalities
+            break 
         node_list = rng.permutation(node_list).tolist()
 
     return list(selected_nodes), total_cost
