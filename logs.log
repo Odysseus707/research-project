@@ -3834,3 +3834,27 @@
 2026-03-31 15:03:28,482 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'temp_min', 'temp_max'}
 2026-03-31 15:03:28,483 | INFO | Orchestrator | Predicted weather: snow
 2026-03-31 15:03:28,516 | INFO | Orchestrator | Random selection path: [75]
+2026-04-06 14:32:59,557 | INFO | networkENV | Tree generated with branching_factor=2, height=3, total_nodes=15
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Candidate nodes and scores:
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 2: modalities={'temp_max'}, score=1, hops=1, utility=0.0
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 3: modalities={'temp_max', 'wind'}, score=2, hops=2, utility=0.0
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 4: modalities={'temp_max'}, score=1, hops=2, utility=-0.5
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 6: modalities={'wind'}, score=1, hops=2, utility=-0.5
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 7: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 9: modalities={'temp_max', 'wind'}, score=2, hops=3, utility=-0.5
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 11: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 12: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 13: modalities={'wind'}, score=1, hops=3, utility=-1.0
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Node 14: modalities={'temp_max'}, score=1, hops=3, utility=-1.0
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Selection path: Selected node 2 (covers {'temp_max'}, hops=1, utility=0.0) -> Selected node 3 (covers {'temp_max', 'wind'}, hops=2, utility=0.0)
+2026-04-06 14:32:59,568 | INFO | Orchestrator | Orchestrator selected nodes: [2, 3] to cover modalities: {'temp_max', 'wind'}
+2026-04-06 14:32:59,569 | INFO | Orchestrator | Predicted weather: rain
+2026-04-06 14:35:25,981 | INFO | networkENV | Tree generated with branching_factor=2, height=4, total_nodes=31
+2026-04-06 14:37:41,305 | INFO | networkENV | Tree generated with branching_factor=2, height=4, total_nodes=31
+2026-04-06 14:37:41,431 | INFO | ILP Solver | ILP selected nodes: [1, 2]
+2026-04-06 14:37:41,431 | INFO | ILP Solver | ILP assignments (node, modality): [(1, 'wind'), (1, 'precipitation'), (2, 'temp_min'), (2, 'temp_max')]
+2026-04-06 14:39:39,637 | INFO | networkENV | Tree generated with branching_factor=2, height=4, total_nodes=31
+2026-04-06 14:39:39,706 | INFO | ILP Solver | ILP selected nodes: [1, 2, 4, 5]
+2026-04-06 14:39:39,706 | INFO | ILP Solver | ILP assignments (node, modality): [(1, 'precipitation'), (2, 'temp_min'), (4, 'temp_max'), (5, 'wind')]
+2026-04-06 14:39:39,706 | INFO | ILP Solver | ILP Objective value: 6.0
+2026-04-06 14:39:39,706 | INFO | ILP Solver | Solver status: Optimal
