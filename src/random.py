@@ -14,7 +14,7 @@ if t.TYPE_CHECKING:
 
 def create_rng(seed: Generator | int | None = None) -> Generator:
     match seed:
-        case Generator():
+        case np.random.Generator():
             return seed
         case int():
             return np.random.default_rng(seed)
@@ -40,19 +40,20 @@ def generate_modality_mask(num_modalities, rng, decay_probs=[1.0, 0.5, 0.1, 0.01
 def partition_dataset(
     dataset: pd.DataFrame,
     num_nodes: int,
-    time_alpha: float,
-    modality_alpha: float,
+    alpha: float = 1e5,
+    # time_alpha: float,
+    # modality_alpha: float,
     seed: Generator | int | None = None,
 ) -> dict[int, pd.DataFrame]:
     rng = create_rng(seed)
     modalities = [col for col in dataset.columns if col not in ("date", "weather")]
-    num_modalities = len(modalities)
     partitions = {client: pd.DataFrame(dataset["date"]) for client in range(num_nodes)}
+
     for client in partitions:
         for m in modalities:
             partitions[client][m] = pd.Series(dtype=float)
 
-    client_alpha = rng.dirichlet([100000.0] * num_nodes)
+    client_alpha = rng.dirichlet([alpha] * num_nodes)
     for i, row in enumerate(dataset.itertuples()):
         for m in modalities:
             client_dir = rng.dirichlet(client_alpha)
@@ -88,29 +89,53 @@ def create_tree(g: nx.Graph, orchestrator_idx: int | None = None):
 
 def random_env(
     dataset: pd.DataFrame,
-    num_nodes: int,
     graph: nx.Graph,
+    alpha: float = 1e5,
     seed: Generator | int | None = None,
 ) -> Env:
     rng = create_rng(seed)
     tree = create_tree(graph)
 
-    nodes = []
-    for node_idx, node_data in tree.nodes(data=True):
-        if node_data["type"] != "worker":
-            continue
+    worker_node_ids = filter(
+        lambda node: tree.nodes[node]["type"] == "worker",
+        tree.nodes(),
+    )
+    worker_node_ids = list(worker_node_ids)
+    num_workers = len(worker_node_ids)
 
-        node_modalities = ...
-        node_timestamps = ...
-        node_dataset = partition_data(dataset, ...)
-        nodes.append(Node(idx=node_idx, data=node_dataset))
+    node_partitioned_data = partition_dataset(
+        dataset, num_nodes=num_workers, alpha=alpha
+    )
 
-    # orchestrator = ...
-    timestamps = ...  # TODO: Get these from the dataframe itself
-    modalities = ...  # TODO: Get these from the dataframe itself or via arg
+    worker_id_to_dataset_id = {
+        worker_id: dataset_id
+        for (dataset_id, worker_id) in zip(
+            node_partitioned_data.keys(), worker_node_ids
+        )
+    }
+
+    workers: list[Node] = []
+    for worker_id in worker_node_ids:
+        dataset_id = worker_id_to_dataset_id[worker_id]
+        worker_data = node_partitioned_data[dataset_id]
+        workers.append(
+            Node(
+                idx=worker_id,
+                data=worker_data,
+            )
+        )
+
+    sample_data = next(iter(node_partitioned_data.values()))
+    timestamps = sample_data.date.tolist()
+    modalities = sample_data.columns.tolist()
+    for non_modality in ("date", "weather"):
+        try:
+            modalities.remove(non_modality)
+        except ValueError:
+            pass
 
     return Env(
-        nodes=nodes,
+        nodes=workers,
         # orchestator=orchestrator,
         topo=tree,
         timestamps=timestamps,

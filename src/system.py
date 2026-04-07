@@ -4,6 +4,8 @@ import typing as t
 import networkx as nx
 import pandas as pd
 
+import functools
+
 T = t.TypeVar("T")
 
 
@@ -32,18 +34,22 @@ T = t.TypeVar("T")
 @dataclasses.dataclass
 class Node:
     idx: int
-    data: pd.DataFrame
+    data: pd.DataFrame = dataclasses.field(init=True, repr=False)
     # to track which needed modalities are present in this node's data
-    flag: dict[T:bool]
+    # flag: dict[T, bool]
 
-    @property
+    # TODO: Adjust because I do not think this works since we fix each worker to
+    # have the same timestamps. We need to check for if the row contains nothing
+    # but NAN values for the modalities.
+    @functools.cached_property
     def timestamps(self) -> list[int]:
         ts = self.data.timestamp.unique()
         ts = ts.tolist()
         ts = sorted(ts)
         return ts
 
-    @property
+    # TODO: Similar to other TODO above.
+    @functools.cached_property
     def modalities(self) -> list[T]:
         df = self.data
         columns_without_modalities = df.loc[:, df.notna().any(axis=0)]
@@ -84,17 +90,28 @@ class Request:
 @dataclasses.dataclass
 class Env:
     nodes: list[Node]
-    # orchestator: Orchestrator
     topo: nx.Graph
-    timestamps: list[int]
-    modalities: list[T]
-    modalities_weights: dict[T, float]
+    timestamps: list[int] = dataclasses.field(init=True, repr=False)
+    modalities: list[T] = dataclasses.field(init=True, repr=False)
+    # Additional arguments below.
+    modalities_data_size: dict[T, float] = dataclasses.field(init=True, default=None)
     shortest_paths: dict[int, int] = dataclasses.field(init=False, default=None)
     orchestrator_idx: int = 0  # TODO: Turn this into a constant for clarity.
 
     def __post_init__(self):
+        # Set the modality data sizes to 1 if not set via the initializer.
+        if self.modalities_data_size is None:
+            self.modalities_data_size = {}
+            for m in self.modalities:
+                self.modalities_data_size[m] = 1.0
+
+        # Pre-compute the shortest paths.
         self.shortest_paths = {}
-        cloud_node = [node for node in self.topo.nodes() if node.type == "orchestrator"]
+        cloud_node = [
+            node
+            for node, node_data in self.topo.nodes(data=True)
+            if node_data["type"] == "orchestrator"
+        ]
         for node in self.topo.nodes():
             if node not in self.nodes:
                 continue

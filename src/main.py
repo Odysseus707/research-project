@@ -1,5 +1,8 @@
 """
 # The `main.py` file should not be in the `src/` directory.
+
+progress_bar = tqdm(total=...)
+
 for num_requests in [10, 100, 1000, ...]:
     for num_nodes in [10, 20, 30, ...]:
         for data_uniformity in [0.1, 0.2, ...]:
