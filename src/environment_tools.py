@@ -8,7 +8,6 @@ import pandas as pd
 import time
 
 from .system import Env, Node, Request
-from src.alg.proposed import cost
 
 if t.TYPE_CHECKING:
     from numpy.random import Generator
@@ -59,6 +58,21 @@ def _generate_partition_masks(
     return masks
 
 
+def _choose_duplicate_clients(
+    eligible_clients: list[int],
+    primary_client: int,
+    rng,
+    duplicate_prob: float,
+) -> list[int]:
+    duplicate_clients = []
+    for client in eligible_clients:
+        if client == primary_client:
+            continue
+        if rng.random() < duplicate_prob:
+            duplicate_clients.append(client)
+    return duplicate_clients
+
+
 def partition_dataset(
     dataset: pd.DataFrame,
     num_nodes: int,
@@ -70,6 +84,7 @@ def partition_dataset(
     rng = create_rng(seed)
     modalities = [col for col in dataset.columns if col not in ("date", "weather")]
     partitions = {client: pd.DataFrame(dataset["date"]) for client in range(num_nodes)}
+    duplicate_prob = 0.35
 
     for client in partitions:
         for m in modalities:
@@ -83,22 +98,35 @@ def partition_dataset(
 
     for m_idx, modality in enumerate(modalities):
         eligible_clients = [
-            client
-            for client, mask in partition_masks.items()
-            if mask[m_idx] == 1
+            client for client, mask in partition_masks.items() if mask[m_idx] == 1
         ]
         modality_probs = rng.dirichlet([alpha] * len(eligible_clients))
 
         for row_idx, row in enumerate(dataset.itertuples()):
-            client_idx = int(rng.choice(eligible_clients, p=modality_probs))
-            partitions[client_idx].loc[row_idx, modality] = getattr(row, modality)
+            primary_client = int(rng.choice(eligible_clients, p=modality_probs))
+            assigned_clients = [primary_client]
+            assigned_clients.extend(
+                _choose_duplicate_clients(
+                    eligible_clients=eligible_clients,
+                    primary_client=primary_client,
+                    rng=rng,
+                    duplicate_prob=duplicate_prob,
+                )
+            )
+
+            value = getattr(row, modality)
+            for client_idx in assigned_clients:
+                partitions[client_idx].loc[row_idx, modality] = value
 
     return partitions
 
 
 def generate_graph(num_nodes: int, topology_type: str, seed: int = None):
+    if num_nodes < 1:
+        raise ValueError("num_nodes must be at least 1.")
+
     if topology_type == "star":
-        return nx.star_graph(num_nodes)
+        return nx.star_graph(max(0, num_nodes - 1))
     elif topology_type == "barabasi_albert":
         # m must be >= 1 and < num_nodes
         m = min(2, max(1, num_nodes // 10))
@@ -108,23 +136,46 @@ def generate_graph(num_nodes: int, topology_type: str, seed: int = None):
         p = min(0.1 + 10 / num_nodes, 0.5)
         return nx.erdos_renyi_graph(num_nodes, p, seed=seed)
     elif topology_type == "m_ary_tree":
-        # m chosen so tree is not too shallow or deep
         m = min(3, max(2, num_nodes // 20))
-        h = int(np.log(num_nodes) / np.log(m + 1))
-        return nx.balanced_tree(m, h)
+        h = 0
+        graph = nx.balanced_tree(m, h)
+        while graph.number_of_nodes() < num_nodes:
+            h += 1
+            graph = nx.balanced_tree(m, h)
+        return _resize_graph(graph, num_nodes)
     elif topology_type == "dorogovtsev_goltsev_mendes":
-        # This graph requires n >= 3
-        n = max(num_nodes, 3)
-        return nx.dorogovtsev_goltsev_mendes_graph(n)
+        generation = 0
+        graph = nx.dorogovtsev_goltsev_mendes_graph(generation)
+        while graph.number_of_nodes() < num_nodes:
+            generation += 1
+            graph = nx.dorogovtsev_goltsev_mendes_graph(generation)
+        return _resize_graph(graph, num_nodes)
     elif topology_type == "complete":
         return nx.complete_graph(num_nodes)
     elif topology_type == "balanced_tree":
-        # r and h chosen to get close to num_nodes
         r = min(3, max(2, num_nodes // 20))
-        h = int(np.log(num_nodes) / np.log(r + 1))
-        return nx.balanced_tree(r, h)
+        h = 0
+        graph = nx.balanced_tree(r, h)
+        while graph.number_of_nodes() < num_nodes:
+            h += 1
+            graph = nx.balanced_tree(r, h)
+        return _resize_graph(graph, num_nodes)
     else:
         raise ValueError(f"Unknown topology_type: {topology_type}")
+
+
+def _resize_graph(graph: nx.Graph, num_nodes: int, root: int = 0) -> nx.Graph:
+    if graph.number_of_nodes() == num_nodes:
+        return graph
+
+    if root not in graph:
+        root = next(iter(graph.nodes()))
+
+    bfs_order = list(nx.bfs_tree(graph, source=root).nodes())
+    selected_nodes = bfs_order[:num_nodes]
+    resized = graph.subgraph(selected_nodes).copy()
+    mapping = {node: idx for idx, node in enumerate(selected_nodes)}
+    return nx.relabel_nodes(resized, mapping)
 
 
 def create_tree(g: nx.Graph, orchestrator_idx: int | None = None):
@@ -144,6 +195,14 @@ def create_tree(g: nx.Graph, orchestrator_idx: int | None = None):
     return tree
 
 
+def get_modalities_at_timestamp(node: Node, timestamp) -> set[str]:
+    node_df = node.data
+    row = node_df[node_df["date"] == timestamp]
+    if row.empty:
+        return set()
+    return set(row[node.modalities].dropna(axis=1, how="all").columns)
+
+
 def generate_request(env: Env, num_requests_per_node: int = 2):
     requests = []
     idx = 0
@@ -156,15 +215,7 @@ def generate_request(env: Env, num_requests_per_node: int = 2):
             if len(available_timestamps) == 0:
                 continue
             timestamp = rng.choice(available_timestamps)
-            # Get modalities present (non-NaN) at this timestamp for this node
-            node_df = node.data
-            row = node_df[node_df["date"] == timestamp]
-            if not row.empty:
-                present_modalities = set(
-                    row[node.modalities].dropna(axis=1, how="all").columns
-                )
-            else:
-                present_modalities = set()
+            present_modalities = get_modalities_at_timestamp(node, timestamp)
             included_modalities = present_modalities
             req = Request(
                 idx=idx,
@@ -272,23 +323,26 @@ def compute_fairness(env: Env, all_selected_nodes: list[list[int]]) -> float:
     return 1.0 if denominator == 0 else numerator / denominator
 
 
-def compute_qos(env: Env, request: Request, selected_nodes: list[int]) -> bool:
+def compute_successful_calculation(
+    env: Env, request: Request, selected_nodes: list[int]
+) -> tuple[bool, set[str]]:
     """
     Check if the selected nodes together provide all needed modalities for the request at the required timestamp.
     Returns True if all needed modalities are present, False otherwise.
     """
-    present_modalities = set(request.included_modalities)
+    gathered_modalities = set(request.included_modalities)
+    selected_node_ids = set(selected_nodes)
     for node in env.nodes:
-        if node.idx in selected_nodes:
-            node_df = node.data
-            row = node_df[node_df["date"] == request.timestamp]
-            if not row.empty:
-                present_modalities |= set(
-                    row[node.modalities].dropna(axis=1, how="all").columns
-                )
+        if node.idx in selected_node_ids:
+            gathered_modalities |= get_modalities_at_timestamp(node, request.timestamp)
     needed = request.needed_modalities
-    missing = needed - present_modalities
-    return len(missing) == 0
+    missing = needed - gathered_modalities
+    return len(missing) == 0, missing
+
+
+def compute_qos(env: Env, request: Request, selected_nodes: list[int]) -> bool:
+    success, _ = compute_successful_calculation(env, request, selected_nodes)
+    return success
 
 
 def simulate(env: Env, algorithm):
@@ -296,7 +350,8 @@ def simulate(env: Env, algorithm):
     start_time = time.time()
     alg_output = algorithm(env)
     elapsed_time = time.time() - start_time
-    qos_list = []
+    success_list = []
+    failed_calculations = []
     # Extract all selected_nodes directly from alg_output for fairness computation
     all_selected_nodes = [
         output.get("selected_nodes", []) for output in alg_output.values()
@@ -305,17 +360,33 @@ def simulate(env: Env, algorithm):
         output = alg_output.get(request.idx, {})
         selected_nodes = output.get("selected_nodes", [])
         cost_val = compute_cost(env, selected_nodes, request)
-        qos = compute_qos(env, request, selected_nodes)
-        qos_list.append(qos)
+        success, missing_modalities = compute_successful_calculation(
+            env, request, selected_nodes
+        )
+        success_list.append(success)
+        if not success:
+            failed_calculations.append(
+                {
+                    "request_idx": request.idx,
+                    "node_idx": request.node_idx,
+                    "timestamp": request.timestamp,
+                    "missing_modalities": sorted(missing_modalities),
+                }
+            )
         results[request.idx] = {
             "selected_nodes": selected_nodes,
             "cost": cost_val,
-            "qos": qos,
+            "successful_calculation": success,
+            "missing_modalities": sorted(missing_modalities),
         }
     fairness_index = compute_fairness(env, all_selected_nodes)
     return {
         "results": results,
         "time_taken": elapsed_time,
         "fairness_index": fairness_index,
-        "qos_overall": sum(qos_list) / len(qos_list) if qos_list else 0.0,
+        "successful_calculation_overall": (
+            sum(success_list) / len(success_list) if success_list else 0.0
+        ),
+        "failed_calculations": failed_calculations,
+        "failed_calculation_count": len(failed_calculations),
     }

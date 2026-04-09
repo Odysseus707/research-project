@@ -23,7 +23,8 @@ SUMMARY_COLUMNS = PARAM_COLUMNS + [
     "algorithm",
     "time_taken",
     "fairness_index",
-    "qos_overall",
+    "successful_calculation_overall",
+    "failed_calculation_count",
 ]
 ALGORITHM_ORDER = ["proposed", "random", "ilp"]
 ALGORITHM_LABELS = {
@@ -64,11 +65,16 @@ def ensure_output_dir(output_dir: str | Path) -> Path:
 
 
 def aggregate_request_metrics(df: pd.DataFrame) -> pd.DataFrame:
+    success_column = (
+        "successful_calculation"
+        if "successful_calculation" in df.columns
+        else "qos"
+    )
     grouped = (
         df.groupby(PARAM_COLUMNS + ["algorithm"], dropna=False)
         .agg(
             avg_cost_per_request=("cost", "mean"),
-            avg_qos=("qos", "mean"),
+            avg_successful_calculation=(success_column, "mean"),
             request_count=("request_idx", "count"),
         )
         .reset_index()
@@ -80,7 +86,12 @@ def aggregate_run_metrics(df: pd.DataFrame) -> pd.DataFrame:
     available_summary_columns = [
         column for column in SUMMARY_COLUMNS if column in df.columns
     ]
-    missing = {"time_taken", "fairness_index", "qos_overall"} - set(df.columns)
+    missing = {
+        "time_taken",
+        "fairness_index",
+        "successful_calculation_overall",
+        "failed_calculation_count",
+    } - set(df.columns)
     if missing:
         return pd.DataFrame()
 
@@ -91,7 +102,11 @@ def aggregate_run_metrics(df: pd.DataFrame) -> pd.DataFrame:
         .agg(
             avg_time_taken=("time_taken", "mean"),
             avg_fairness=("fairness_index", "mean"),
-            avg_qos_overall=("qos_overall", "mean"),
+            avg_successful_calculation_overall=(
+                "successful_calculation_overall",
+                "mean",
+            ),
+            avg_failed_calculation_count=("failed_calculation_count", "mean"),
         )
         .reset_index()
     )
@@ -190,20 +205,20 @@ def plot_runtime_comparison(
     )
 
 
-def plot_qos_comparison(
+def plot_successful_calculation_comparison(
     request_metrics: pd.DataFrame,
     output_dir: str | Path = DEFAULT_OUTPUT_DIR,
     group_by: str = "num_nodes",
     filters: dict[str, object] | None = None,
 ) -> Path:
-    output_path = ensure_output_dir(output_dir) / "qos_comparison.png"
+    output_path = ensure_output_dir(output_dir) / "successful_calculation_comparison.png"
     return _plot_metric_by_x(
         request_metrics,
         x_column=group_by,
-        y_column="avg_qos",
+        y_column="avg_successful_calculation",
         output_path=output_path,
-        title="Average QoS Satisfaction",
-        ylabel="QoS Rate",
+        title="Average Successful Calculation Rate",
+        ylabel="Success Rate",
         filters=filters,
     )
 
@@ -229,6 +244,66 @@ def plot_fairness_comparison(
         ylabel="Fairness Index",
         filters=filters,
     )
+
+
+def plot_failed_calculation_bar(
+    run_metrics: pd.DataFrame,
+    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    group_by: str = "num_nodes",
+    filters: dict[str, object] | None = None,
+) -> Path:
+    if run_metrics.empty:
+        raise ValueError(
+            "Failed calculation data is unavailable in this CSV. "
+            "Re-run the experiments after updating src/main.py."
+        )
+
+    plot_df = run_metrics.copy()
+    if filters:
+        for column, value in filters.items():
+            plot_df = plot_df[plot_df[column] == value]
+
+    if plot_df.empty:
+        raise ValueError("No rows matched the requested filters for plotting.")
+
+    output_path = ensure_output_dir(output_dir) / "failed_calculation_count.png"
+    x_values = sorted(plot_df[group_by].unique())
+    x_positions = list(range(len(x_values)))
+    bar_width = 0.25
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for idx, algorithm in enumerate(ALGORITHM_ORDER):
+        alg_df = plot_df[plot_df["algorithm"] == algorithm].sort_values(group_by)
+        if alg_df.empty:
+            continue
+        offset = (idx - 1) * bar_width
+        positions = [pos + offset for pos in x_positions]
+        y_values = []
+        for x_value in x_values:
+            match = alg_df[alg_df[group_by] == x_value]
+            y_values.append(
+                float(match["avg_failed_calculation_count"].iloc[0])
+                if not match.empty
+                else 0.0
+            )
+        ax.bar(
+            positions,
+            y_values,
+            width=bar_width,
+            label=ALGORITHM_LABELS.get(algorithm, algorithm.title()),
+            color=ALGORITHM_COLORS.get(algorithm),
+        )
+
+    ax.set_title("Failed Calculations Per Experiment")
+    ax.set_xlabel(group_by.replace("_", " ").title())
+    ax.set_ylabel("Average Failed Calculations")
+    ax.set_xticks(x_positions)
+    ax.set_xticklabels(x_values)
+    _apply_algorithm_style(ax)
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=200)
+    plt.close(fig)
+    return output_path
 
 
 def _parse_filters(filter_args: Iterable[str]) -> dict[str, object]:
@@ -262,7 +337,9 @@ def create_all_plots(
     run_metrics = aggregate_run_metrics(df)
     created_plots = [
         plot_avg_cost_per_request(request_metrics, output_dir, group_by, filters),
-        plot_qos_comparison(request_metrics, output_dir, group_by, filters),
+        plot_successful_calculation_comparison(
+            request_metrics, output_dir, group_by, filters
+        ),
     ]
 
     if not run_metrics.empty:
@@ -271,6 +348,9 @@ def create_all_plots(
         )
         created_plots.append(
             plot_fairness_comparison(run_metrics, output_dir, group_by, filters)
+        )
+        created_plots.append(
+            plot_failed_calculation_bar(run_metrics, output_dir, group_by, filters)
         )
 
     return created_plots

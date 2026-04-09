@@ -83,6 +83,10 @@ class Request:
         needed = self.needed_modalities
         return gathered_modalities >= needed and len(needed) > 0
 
+    def successful_calculation(self, gathered_modalities: set) -> bool:
+        needed = self.needed_modalities
+        return gathered_modalities >= needed
+
 
 # @dataclasses.dataclass
 # class Orchestrator:
@@ -116,13 +120,18 @@ class Env:
 
         # Pre-compute the shortest paths.
         self.shortest_paths = {}
-        cloud_node = [
+        cloud_nodes = [
             node
             for node, node_data in self.topo.nodes(data=True)
             if node_data["type"] == "orchestrator"
         ]
+        if not cloud_nodes:
+            raise ValueError("Env requires a topology with an orchestrator node.")
+
+        cloud_node = cloud_nodes[0]
+        worker_node_ids = {node.idx for node in self.nodes}
         for node in self.topo.nodes():
-            if node not in self.nodes:
+            if node not in worker_node_ids:
                 continue
 
             self.shortest_paths[node] = nx.shortest_path_length(

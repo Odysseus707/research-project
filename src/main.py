@@ -34,18 +34,18 @@ df = pd.read_csv(DATA_PATH)
 
 # Experiment parameters
 test_grid = {
-    "num_requests_per_node": [10, 50, 100],
+    "num_requests_per_node": [10],
     "num_nodes": [10, 20, 50, 100, 200],
-    "data_uniformity": [1, 1e2, 1e5],
-    "seed": list(range(1, 3)),
+    "data_uniformity": [1, 1e5],
+    "seed": list(range(1, 2)),
     "topology_type": [
         "star",
-        #        "barabasi_albert",
-        #        "erdos_renyi",
-        #        "m_ary_tree",
-        #        "dorogovtsev_goltsev_mendes",
-        #        "complete",
-        #        "balanced_tree",
+        "barabasi_albert",
+        "erdos_renyi",
+        "m_ary_tree",
+        "dorogovtsev_goltsev_mendes",
+        "complete",
+        "balanced_tree",
     ],
 }
 
@@ -54,6 +54,7 @@ algorithms = {
     "random": random_algorithm,
     "ilp": solve_ilp,
 }
+
 
 def _run_algorithm(env: Any, alg_name: str, algorithm: Any):
     return alg_name, simulate(env, algorithm)
@@ -141,10 +142,21 @@ def run_experiments() -> None:
                             "needed_modalities": req["needed_modalities"],
                             "selected_nodes": selected_nodes,
                             "cost": req_result.get("cost"),
-                            "qos": req_result.get("qos"),
+                            "successful_calculation": req_result.get(
+                                "successful_calculation"
+                            ),
+                            "missing_modalities": req_result.get("missing_modalities"),
                             "time_taken": sim_result.get("time_taken"),
                             "fairness_index": sim_result.get("fairness_index"),
-                            "qos_overall": sim_result.get("qos_overall"),
+                            "successful_calculation_overall": sim_result.get(
+                                "successful_calculation_overall"
+                            ),
+                            "failed_calculation_count": sim_result.get(
+                                "failed_calculation_count"
+                            ),
+                            "failed_calculations": sim_result.get(
+                                "failed_calculations"
+                            ),
                         }
                     )
                 pbar.update(1)

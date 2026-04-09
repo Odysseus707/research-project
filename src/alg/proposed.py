@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import typing as t
-import networkx as nx
-
-
-from src.system import Node, Env, Request
+from src.environment_tools import get_modalities_at_timestamp
+from src.system import Env
 
 
 def cost(hops: int, weight_m: float) -> float:
@@ -25,17 +23,23 @@ def proposed_algorithm(env: Env) -> dict:
     for request in env.requests:
         needed = request.needed_modalities
         selected_nodes = set()
+        available_modalities_by_node = {
+            node.idx: get_modalities_at_timestamp(node, request.timestamp)
+            for node in env.nodes
+        }
         for modality in needed:
             best_node = None
             best_cost = float("inf")
             for node in env.nodes:
-                if modality in node.modalities:
-                    hops = env.shortest_paths.get(node.idx, 1)
-                    w = env.modalities_data_size.get(modality, 1.0)
-                    c = hops * w
-                    if c < best_cost:
-                        best_cost = c
-                        best_node = node.idx
+                present_modalities = available_modalities_by_node[node.idx]
+                if modality not in present_modalities:
+                    continue
+                hops = env.shortest_paths.get(node.idx, 1)
+                w = env.modalities_data_size.get(modality, 1.0)
+                c = hops * w
+                if c < best_cost:
+                    best_cost = c
+                    best_node = node.idx
             if best_node is not None:
                 selected_nodes.add(best_node)
         results[request.idx] = {"selected_nodes": list(selected_nodes)}

@@ -22,14 +22,18 @@ class TestSimulate(unittest.TestCase):
         self.assertIn("results", results)
         self.assertIn("time_taken", results)
         self.assertIn("fairness_index", results)
-        self.assertIn("qos_overall", results)
+        self.assertIn("successful_calculation_overall", results)
+        self.assertIn("failed_calculations", results)
+        self.assertIn("failed_calculation_count", results)
         for req_idx, res in results["results"].items():
             self.assertIn("selected_nodes", res)
             self.assertIsInstance(res["selected_nodes"], list)
             self.assertIn("cost", res)
             self.assertIsInstance(res["cost"], (int, float))
-            self.assertIn("qos", res)
-            self.assertIsInstance(res["qos"], bool)
+            self.assertIn("successful_calculation", res)
+            self.assertIsInstance(res["successful_calculation"], bool)
+            self.assertIn("missing_modalities", res)
+            self.assertIsInstance(res["missing_modalities"], list)
 
     def test_simulate_proposed(self):
         results = simulate(self.env, proposed_algorithm)
