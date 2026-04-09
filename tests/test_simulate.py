@@ -6,16 +6,14 @@ from src.environment_tools import simulate
 from src.alg.proposed import proposed_algorithm
 from src.alg.random_select import random_algorithm
 from src.alg.ilp_solver import solve_ilp
+import pandas as pd
+import networkx as nx
+from src.environment_tools import random_env
 
 class TestSimulate(unittest.TestCase):
     def setUp(self):
-        import pandas as pd
-        import networkx as nx
-        from src.environment_tools import random_env
-        # Load the real seattle-weather.csv dataset
         df = pd.read_csv("seattle-weather.csv")
-        # Use a simple graph for the test
-        G = nx.path_graph(3)
+        G = nx.star_graph(10)
         self.env = random_env(df, G, alpha=1e5, seed=42)
 
 
@@ -24,9 +22,14 @@ class TestSimulate(unittest.TestCase):
         self.assertIn("results", results)
         self.assertIn("time_taken", results)
         self.assertIn("fairness_index", results)
+        self.assertIn("qos_overall", results)
         for req_idx, res in results["results"].items():
             self.assertIn("selected_nodes", res)
+            self.assertIsInstance(res["selected_nodes"], list)
             self.assertIn("cost", res)
+            self.assertIsInstance(res["cost"], (int, float))
+            self.assertIn("qos", res)
+            self.assertIsInstance(res["qos"], bool)
 
     def test_simulate_proposed(self):
         results = simulate(self.env, proposed_algorithm)
@@ -39,17 +42,7 @@ class TestSimulate(unittest.TestCase):
         self._check_simulate_output(results)
 
     def test_simulate_ilp(self):
-        # Wrap solve_ilp to match the interface (env, requests)
-        def ilp_wrapper(env, requests):
-            # For each request, run solve_ilp on a temp env with only needed modalities
-            out = {}
-            for req in requests:
-                # Create a shallow copy of env with only needed modalities for this request
-                temp_env = env
-                temp_env.modalities = list(req.needed_modalities)
-                out[req.idx] = solve_ilp(temp_env)
-            return out
-        results = simulate(self.env, ilp_wrapper)
+        results = simulate(self.env, solve_ilp)
         print("\n[Simulate Output - ILP Algorithm]\n", results)
         self._check_simulate_output(results)
 

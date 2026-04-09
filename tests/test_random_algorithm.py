@@ -14,18 +14,9 @@ def dataset():
 def test_random_algorithm(dataset):
     tree = nx.star_graph(10)
     env = random_env(dataset, tree, seed=42)
-    start = time.perf_counter()
-    output = random_algorithm(env, env.requests, seed=42)
-    elapsed = time.perf_counter() - start
-    results = {}
-    for request in env.requests:
-        res = output[request.idx]
-        assert "selected_nodes" in res and "cost" in res
+    output = random_algorithm(env, seed=42)
+    assert isinstance(output, dict)
+    for req_idx, res in output.items():
+        assert "selected_nodes" in res
         assert isinstance(res["selected_nodes"], list)
-        assert isinstance(res["cost"], float)
-        results[request.idx] = {
-            "time_taken": elapsed,
-            "cost": res["cost"],
-            "selected_nodes": res["selected_nodes"],
-        }
-    print(results)
+    print(output)

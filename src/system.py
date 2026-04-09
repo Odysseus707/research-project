@@ -40,20 +40,22 @@ class Node:
 
     # TODO: Adjust because I do not think this works since we fix each worker to
     # have the same timestamps. We need to check for if the row contains nothing
-    # but NAN values for the modalities.
-    @functools.cached_property
-    def timestamps(self) -> list[int]:
-        ts = self.data.timestamp.unique()
-        ts = ts.tolist()
-        ts = sorted(ts)
-        return ts
+    # but NAN values for the modalities. ---> DONE
+    @property
+    def timestamps(self) -> list:
+        # Only include timestamps where at least one modality is present (not all NaN)
+        modality_cols = [col for col in self.data.columns if col not in ("date", "weather")]
+        mask = ~self.data[modality_cols].isna().all(axis=1)
+        valid_dates = self.data.loc[mask, "date"].unique()
+        return sorted(valid_dates)
 
-    # TODO: Similar to other TODO above.
-    @functools.cached_property
+    # TODO: Similar to other TODO above. ---> DONE
+    @property
     def modalities(self) -> list[T]:
-        df = self.data
-        columns_without_modalities = df.loc[:, df.notna().any(axis=0)]
-        return columns_without_modalities
+        # Only include columns that are modalities and have at least one non-NaN value
+        modality_cols = [col for col in self.data.columns if col not in ("date", "weather")]
+        present_modalities = [col for col in modality_cols if self.data[col].notna().any()]
+        return present_modalities
 
 
 @dataclasses.dataclass
@@ -76,6 +78,10 @@ class Request:
             case _:
                 total_modalities = set()
         return total_modalities - self.included_modalities
+    
+    def qos(self, gathered_modalities: set) -> bool:
+        needed = self.needed_modalities
+        return gathered_modalities >= needed and len(needed) > 0
 
 
 # @dataclasses.dataclass
