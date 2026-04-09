@@ -218,6 +218,11 @@ def random_env(
 
 
 def compute_cost(env: Env, selected_nodes: list[int], request: Request) -> float:
+    """
+    Compute the total communication cost for fulfilling a request.
+    For each selected node, multiplies the number of hops from the root to the node
+    by the data size weight for each needed modality, summed over all selected nodes and modalities.
+    """
     total_cost = 0.0
     for node_idx in selected_nodes:
         hops = env.shortest_paths.get(node_idx, 1)
@@ -228,6 +233,10 @@ def compute_cost(env: Env, selected_nodes: list[int], request: Request) -> float
 
 
 def compute_fairness(env: Env, all_selected_nodes: list[list[int]]) -> float:
+    """
+    Compute the fairness of node selection across all requests using Jain's index.
+    Returns 1.0 if all nodes are selected equally often, less if selection is uneven.
+    """
     node_selection_counts = {node.idx: 0 for node in env.nodes}
     for selected in all_selected_nodes:
         for node_idx in selected:
@@ -240,7 +249,10 @@ def compute_fairness(env: Env, all_selected_nodes: list[list[int]]) -> float:
 
 
 def compute_qos(env: Env, request: Request, selected_nodes: list[int]) -> bool:
-    # Start with included modalities
+    """
+    Check if the selected nodes together provide all needed modalities for the request at the required timestamp.
+    Returns True if all needed modalities are present, False otherwise.
+    """
     present_modalities = set(request.included_modalities)
     for node in env.nodes:
         if node.idx in selected_nodes:

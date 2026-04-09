@@ -26,6 +26,9 @@ This project simulates a distributed network of nodes, each holding a subset of 
 ## How to Run
 1. Install requirements (see your environment setup).
 2. Run `python main.py` to simulate a single request.
+```
+venv/bin/python -m src.main
+```
 3. Run `python compare_runtimes.py` to benchmark all selection methods and generate a runtime comparison plot.
 
 
