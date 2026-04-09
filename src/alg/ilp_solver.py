@@ -11,7 +11,8 @@ from src.system import Node, Env, Request
 
 def solve_ilp(env: Env) -> dict:
     """
-    For each request in env.requests, solve the ILP and return a dict mapping request.idx to {"selected_nodes": [...]}
+    For each request in env.requests, solve the ILP and return a dict mapping
+    request.idx to the selected node set and the modality-to-node assignment.
     """
     results = {}
     for request in env.requests:
@@ -55,7 +56,11 @@ def solve_ilp(env: Env) -> dict:
         prob.solve(pulp.PULP_CBC_CMD(msg=False))
         selected = [(v, m) for v in V for m in M if pulp.value(x_vm[(v, m)]) > 0.5]
         selected_nodes = set(v for v, m in selected)
-        results[request.idx] = {"selected_nodes": list(selected_nodes)}
+        modality_assignment = {m: v for v, m in selected}
+        results[request.idx] = {
+            "selected_nodes": list(selected_nodes),
+            "modality_assignment": modality_assignment,
+        }
     return results
 
 

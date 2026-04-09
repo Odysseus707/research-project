@@ -1,8 +1,7 @@
 import pytest
 import pandas as pd
 import networkx as nx
-import time
-from src.environment_tools import random_env, generate_request
+from src.environment_tools import get_modalities_at_timestamp, random_env
 from src.alg.ilp_solver import solve_ilp
 
 @pytest.fixture
@@ -15,6 +14,14 @@ def test_ilp_algorithm(dataset):
     output = solve_ilp(env)
     assert isinstance(output, dict)
     for req_idx, res in output.items():
+        request = next(req for req in env.requests if req.idx == req_idx)
         assert "selected_nodes" in res
         assert isinstance(res["selected_nodes"], list)
-    print(output)
+        assert "modality_assignment" in res
+        assert isinstance(res["modality_assignment"], dict)
+        assert set(res["modality_assignment"].keys()) == set(request.needed_modalities)
+
+        for modality, node_idx in res["modality_assignment"].items():
+            assert node_idx in res["selected_nodes"]
+            node = next(node for node in env.nodes if node.idx == node_idx)
+            assert modality in get_modalities_at_timestamp(node, request.timestamp)

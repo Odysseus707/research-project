@@ -127,6 +127,7 @@ def run_experiments() -> None:
                 for req in request_rows:
                     req_result = sim_result["results"].get(req["request_idx"], {})
                     selected_nodes = req_result.get("selected_nodes", [])
+                    modality_assignment = req_result.get("modality_assignment", {})
                     results.append(
                         {
                             "algorithm": alg_name,
@@ -141,6 +142,7 @@ def run_experiments() -> None:
                             "included_modalities": req["included_modalities"],
                             "needed_modalities": req["needed_modalities"],
                             "selected_nodes": selected_nodes,
+                            "modality_assignment": modality_assignment,
                             "cost": req_result.get("cost"),
                             "successful_calculation": req_result.get(
                                 "successful_calculation"

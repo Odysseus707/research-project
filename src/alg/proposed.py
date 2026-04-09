@@ -23,6 +23,7 @@ def proposed_algorithm(env: Env) -> dict:
     for request in env.requests:
         needed = request.needed_modalities
         selected_nodes = set()
+        modality_assignment = {}
         available_modalities_by_node = {
             node.idx: get_modalities_at_timestamp(node, request.timestamp)
             for node in env.nodes
@@ -42,5 +43,9 @@ def proposed_algorithm(env: Env) -> dict:
                     best_node = node.idx
             if best_node is not None:
                 selected_nodes.add(best_node)
-        results[request.idx] = {"selected_nodes": list(selected_nodes)}
+                modality_assignment[modality] = best_node
+        results[request.idx] = {
+            "selected_nodes": list(selected_nodes),
+            "modality_assignment": modality_assignment,
+        }
     return results

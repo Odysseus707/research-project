@@ -292,18 +292,64 @@ def random_env(
     return env
 
 
-def compute_cost(env: Env, selected_nodes: list[int], request: Request) -> float:
+def compute_cost(
+    env: Env,
+    request: Request,
+    modality_assignment: dict[str, int] | None = None,
+    selected_nodes: list[int] | None = None,
+) -> float:
     """
     Compute the total communication cost for fulfilling a request.
-    For each selected node, multiplies the number of hops from the root to the node
-    by the data size weight for each needed modality, summed over all selected nodes and modalities.
+
+    This is designed to match the ILP objective as closely as possible:
+    each needed modality is charged exactly once, using the node that is
+    assigned to provide that modality.
+
+    Example:
+    If a request needs {"wind", "temp_max"} and the assignment is
+    {"wind": 4, "temp_max": 9}, then the total cost is:
+    hops(4) * weight("wind") + hops(9) * weight("temp_max")
+
+    This is different from the older scheme, which charged every selected
+    node for every needed modality and could overcount the true transfer cost.
+
+    If no explicit modality assignment is provided, this falls back to the
+    cheapest eligible selected node for each modality. That keeps the metric
+    aligned with the objective even for algorithms that only return a node set.
     """
+    modality_assignment = modality_assignment or {}
+    selected_nodes = selected_nodes or []
+
     total_cost = 0.0
-    for node_idx in selected_nodes:
-        hops = env.shortest_paths.get(node_idx, 1)
-        for m in request.needed_modalities:
-            w = env.modalities_data_size.get(m, 1.0)
-            total_cost += hops * w
+    if modality_assignment:
+        for modality in request.needed_modalities:
+            node_idx = modality_assignment.get(modality)
+            if node_idx is None:
+                continue
+            hops = env.shortest_paths.get(node_idx, 1)
+            weight = env.modalities_data_size.get(modality, 1.0)
+            total_cost += hops * weight
+        return total_cost
+
+    if not selected_nodes:
+        return total_cost
+
+    selected_node_ids = set(selected_nodes)
+    for modality in request.needed_modalities:
+        best_cost = None
+        for node in env.nodes:
+            if node.idx not in selected_node_ids:
+                continue
+            present_modalities = get_modalities_at_timestamp(node, request.timestamp)
+            if modality not in present_modalities:
+                continue
+            hops = env.shortest_paths.get(node.idx, 1)
+            weight = env.modalities_data_size.get(modality, 1.0)
+            candidate_cost = hops * weight
+            if best_cost is None or candidate_cost < best_cost:
+                best_cost = candidate_cost
+        if best_cost is not None:
+            total_cost += best_cost
     return total_cost
 
 
@@ -359,7 +405,13 @@ def simulate(env: Env, algorithm):
     for request in env.requests:
         output = alg_output.get(request.idx, {})
         selected_nodes = output.get("selected_nodes", [])
-        cost_val = compute_cost(env, selected_nodes, request)
+        modality_assignment = output.get("modality_assignment", {})
+        cost_val = compute_cost(
+            env,
+            request,
+            modality_assignment=modality_assignment,
+            selected_nodes=selected_nodes,
+        )
         success, missing_modalities = compute_successful_calculation(
             env, request, selected_nodes
         )
@@ -375,6 +427,7 @@ def simulate(env: Env, algorithm):
             )
         results[request.idx] = {
             "selected_nodes": selected_nodes,
+            "modality_assignment": modality_assignment,
             "cost": cost_val,
             "successful_calculation": success,
             "missing_modalities": sorted(missing_modalities),

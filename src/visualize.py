@@ -8,6 +8,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 
 DEFAULT_RESULTS_PATH = Path("experiment_results.csv")
@@ -37,6 +38,16 @@ ALGORITHM_COLORS = {
     "random": "#d95f02",
     "ilp": "#7570b3",
 }
+ALGORITHM_MARKERS = {
+    "proposed": "o",
+    "random": "s",
+    "ilp": "^",
+}
+ALGORITHM_ALPHAS = {
+    "proposed": 1.0,
+    "random": 0.5,
+    "ilp": 0.5,
+}
 
 
 def load_experiment_results(csv_path: str | Path = DEFAULT_RESULTS_PATH) -> pd.DataFrame:
@@ -64,25 +75,25 @@ def ensure_output_dir(output_dir: str | Path) -> Path:
     return output_path
 
 
-def aggregate_request_metrics(df: pd.DataFrame) -> pd.DataFrame:
+def prepare_request_metrics_longform(df: pd.DataFrame) -> pd.DataFrame:
     success_column = (
         "successful_calculation"
         if "successful_calculation" in df.columns
         else "qos"
     )
-    grouped = (
-        df.groupby(PARAM_COLUMNS + ["algorithm"], dropna=False)
-        .agg(
-            avg_cost_per_request=("cost", "mean"),
-            avg_successful_calculation=(success_column, "mean"),
-            request_count=("request_idx", "count"),
+    return (
+        df[PARAM_COLUMNS + ["algorithm", "request_idx", "cost", success_column]]
+        .rename(
+            columns={
+                "cost": "avg_cost_per_request",
+                success_column: "avg_successful_calculation",
+            }
         )
-        .reset_index()
+        .copy()
     )
-    return grouped
 
 
-def aggregate_run_metrics(df: pd.DataFrame) -> pd.DataFrame:
+def prepare_run_metrics_longform(df: pd.DataFrame) -> pd.DataFrame:
     available_summary_columns = [
         column for column in SUMMARY_COLUMNS if column in df.columns
     ]
@@ -95,22 +106,21 @@ def aggregate_run_metrics(df: pd.DataFrame) -> pd.DataFrame:
     if missing:
         return pd.DataFrame()
 
-    grouped = (
+    return (
         df[available_summary_columns]
         .drop_duplicates()
-        .groupby(PARAM_COLUMNS + ["algorithm"], dropna=False)
-        .agg(
-            avg_time_taken=("time_taken", "mean"),
-            avg_fairness=("fairness_index", "mean"),
-            avg_successful_calculation_overall=(
-                "successful_calculation_overall",
-                "mean",
-            ),
-            avg_failed_calculation_count=("failed_calculation_count", "mean"),
+        .rename(
+            columns={
+                "time_taken": "avg_time_taken",
+                "fairness_index": "avg_fairness",
+                "successful_calculation_overall": (
+                    "avg_successful_calculation_overall"
+                ),
+                "failed_calculation_count": "avg_failed_calculation_count",
+            }
         )
-        .reset_index()
+        .copy()
     )
-    return grouped
 
 
 def _apply_algorithm_style(ax: plt.Axes) -> None:
@@ -138,20 +148,24 @@ def _plot_metric_by_x(
     if plot_df.empty:
         raise ValueError("No rows matched the requested filters for plotting.")
 
+    sns.set_theme(style="whitegrid")
     fig, ax = plt.subplots(figsize=(10, 6))
-
     for algorithm in ALGORITHM_ORDER:
-        alg_df = plot_df[plot_df["algorithm"] == algorithm].sort_values(x_column)
-        if alg_df.empty:
+        algorithm_df = plot_df[plot_df["algorithm"] == algorithm]
+        if algorithm_df.empty:
             continue
-        ax.plot(
-            alg_df[x_column],
-            alg_df[y_column],
-            marker="o",
+        sns.lineplot(
+            data=algorithm_df,
+            x=x_column,
+            y=y_column,
+            estimator="mean",
+            errorbar=None,
+            marker=ALGORITHM_MARKERS[algorithm],
             linewidth=2.2,
-            markersize=6,
+            color=ALGORITHM_COLORS[algorithm],
+            alpha=ALGORITHM_ALPHAS[algorithm],
             label=ALGORITHM_LABELS.get(algorithm, algorithm.title()),
-            color=ALGORITHM_COLORS.get(algorithm),
+            ax=ax,
         )
 
     ax.set_title(title)
@@ -267,38 +281,28 @@ def plot_failed_calculation_bar(
         raise ValueError("No rows matched the requested filters for plotting.")
 
     output_path = ensure_output_dir(output_dir) / "failed_calculation_count.png"
-    x_values = sorted(plot_df[group_by].unique())
-    x_positions = list(range(len(x_values)))
-    bar_width = 0.25
-
+    sns.set_theme(style="whitegrid")
     fig, ax = plt.subplots(figsize=(10, 6))
-    for idx, algorithm in enumerate(ALGORITHM_ORDER):
-        alg_df = plot_df[plot_df["algorithm"] == algorithm].sort_values(group_by)
-        if alg_df.empty:
-            continue
-        offset = (idx - 1) * bar_width
-        positions = [pos + offset for pos in x_positions]
-        y_values = []
-        for x_value in x_values:
-            match = alg_df[alg_df[group_by] == x_value]
-            y_values.append(
-                float(match["avg_failed_calculation_count"].iloc[0])
-                if not match.empty
-                else 0.0
-            )
-        ax.bar(
-            positions,
-            y_values,
-            width=bar_width,
-            label=ALGORITHM_LABELS.get(algorithm, algorithm.title()),
-            color=ALGORITHM_COLORS.get(algorithm),
-        )
+    sns.barplot(
+        data=plot_df,
+        x=group_by,
+        y="avg_failed_calculation_count",
+        hue="algorithm",
+        hue_order=ALGORITHM_ORDER,
+        palette=ALGORITHM_COLORS,
+        estimator="mean",
+        errorbar=None,
+        ax=ax,
+    )
 
     ax.set_title("Failed Calculations Per Experiment")
     ax.set_xlabel(group_by.replace("_", " ").title())
     ax.set_ylabel("Average Failed Calculations")
-    ax.set_xticks(x_positions)
-    ax.set_xticklabels(x_values)
+    legend = ax.get_legend()
+    if legend is not None:
+        for text in legend.texts:
+            label = text.get_text()
+            text.set_text(ALGORITHM_LABELS.get(label, label.title()))
     _apply_algorithm_style(ax)
     fig.tight_layout()
     fig.savefig(output_path, dpi=200)
@@ -333,8 +337,8 @@ def create_all_plots(
     filters: dict[str, object] | None = None,
 ) -> list[Path]:
     df = load_experiment_results(csv_path)
-    request_metrics = aggregate_request_metrics(df)
-    run_metrics = aggregate_run_metrics(df)
+    request_metrics = prepare_request_metrics_longform(df)
+    run_metrics = prepare_run_metrics_longform(df)
     created_plots = [
         plot_avg_cost_per_request(request_metrics, output_dir, group_by, filters),
         plot_successful_calculation_comparison(
