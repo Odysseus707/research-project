@@ -5,8 +5,10 @@ import typing as t
 import networkx as nx
 import numpy as np
 import pandas as pd
+import time
 
-from .system import Env, Node
+from .system import Env, Node, Request
+from src.alg.proposed import cost
 
 if t.TYPE_CHECKING:
     from numpy.random import Generator
@@ -87,6 +89,48 @@ def create_tree(g: nx.Graph, orchestrator_idx: int | None = None):
     return tree
 
 
+def generate_request(env: Env, num_requests_per_node: int = 2):
+    requests = []
+    idx = 0
+    rng = create_rng()
+    for node in env.nodes:
+        node_df = node.data
+        available_timestamps = node_df["date"].dropna().unique()
+        for _ in range(num_requests_per_node):
+            if len(available_timestamps) == 0:
+                continue
+            timestamp = rng.choice(available_timestamps)
+            # Get modalities present (non-NaN) at this timestamp for this node
+            row = node_df[node_df["date"] == timestamp]
+            present_modalities = (
+                [
+                    m
+                    for m in env.modalities
+                    if m in row.columns and not pd.isna(row.iloc[0][m])
+                ]
+                if not row.empty
+                else []
+            )
+            # Randomly select a subset of present modalities to include
+            num_modalities = rng.integers(0, len(present_modalities) + 1)
+            if num_modalities > 0 and present_modalities:
+                included_modalities = set(
+                    rng.choice(present_modalities, size=num_modalities, replace=False)
+                )
+            else:
+                included_modalities = set()
+            req = Request(
+                node_idx=node.idx,
+                idx=idx,
+                timestamp=timestamp,
+                included_modalities=included_modalities,
+                calculation_type="weather",
+            )
+            requests.append(req)
+            idx += 1
+    return requests
+
+
 def random_env(
     dataset: pd.DataFrame,
     graph: nx.Graph,
@@ -134,10 +178,41 @@ def random_env(
         except ValueError:
             pass
 
-    return Env(
+    # Generate requests for the environment
+    env = Env(
         nodes=workers,
-        # orchestator=orchestrator,
         topo=tree,
         timestamps=timestamps,
         modalities=modalities,
     )
+    env.requests = generate_request(env)
+    return env
+
+
+def simulate(env: Env, algorithm):
+    results = {}
+    start_time = time.time()
+    alg_output = algorithm(env, env.requests)
+    elapsed_time = time.time() - start_time
+    node_selection_counts = {node.idx: 0 for node in env.nodes}
+    for request in env.requests:
+        output = alg_output.get(request.idx, {})
+        selected_nodes = output.get("selected_nodes", [])
+        cost_val = output.get("cost")
+        for node_idx in selected_nodes:
+            if node_idx in node_selection_counts:
+                node_selection_counts[node_idx] += 1
+        results[request.idx] = {
+            "selected_nodes": selected_nodes,
+            "cost": cost_val if cost_val is not None else 0,
+        }
+    # Compute Jain's Fairness Index
+    selection_array = np.array(list(node_selection_counts.values()))
+    numerator = selection_array.sum() ** 2
+    denominator = len(selection_array) * (selection_array**2).sum()
+    fairness_index = 1.0 if denominator == 0 else numerator / denominator
+    return {
+        "results": results,
+        "time_taken": elapsed_time,
+        "fairness_index": fairness_index,
+    }

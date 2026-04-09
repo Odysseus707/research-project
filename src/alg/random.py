@@ -3,7 +3,7 @@ from __future__ import annotations
 import typing as t
 import networkx as nx
 from system import Node, Env, Request
-from src.random import create_rng
+from src.environment_tools import create_rng
 
 
 def cost(hops: int, weight_m: float) -> float:

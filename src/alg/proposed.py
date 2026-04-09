@@ -4,7 +4,7 @@ import typing as t
 import networkx as nx
 
 
-from system import Node, Env, Request
+from src.system import Node, Env, Request
 
 
 def cost(hops: int, weight_m: float) -> float:
@@ -20,40 +20,36 @@ def cost(hops: int, weight_m: float) -> float:
     return hops * weight_m
 
 
-def proposed_algorithm(
-    env: Env,
-    requests: list[Request],
-) -> dict[tuple[int, int], bool]:
-
+def proposed_algorithm(env: Env, requests: list[Request]) -> dict:
+    results = {}
     for request in requests:
-        included_modalities = request.included_modalities
-        remaining_modalities: set = Request.needed_modalities - included_modalities
-
+        needed = request.needed_modalities
         selected_nodes = set()
         total_cost = 0.0
-        G = env.topo
-        orchestrator_idx = 0
-
-        # For each needed modality, find the best node
-        for modality in remaining_modalities:
+        for modality in needed:
             best_node = None
             best_cost = float("inf")
-
             for node in env.nodes:
                 if modality in node.modalities:
-                    hops = nx.shortest_path_length(
-                        G,
-                        source=orchestrator_idx,
-                        target=node.idx,
-                    )
-                    w = env.modalities_weights.get(modality, 1.0)
+                    hops = getattr(env, "shortest_paths", None)
+                    if hops is not None:
+                        hops = env.shortest_paths.get(node.idx, 1)
+                    else:
+                        hops = 1
+                    w = getattr(env, "modalities_data_size", None)
+                    if w is not None:
+                        w = env.modalities_data_size.get(modality, 1.0)
+                    else:
+                        w = 1.0
                     c = cost(hops, w)
                     if c < best_cost:
                         best_cost = c
                         best_node = node.idx
-
             if best_node is not None:
                 selected_nodes.add(best_node)
                 total_cost += best_cost
-
-        return list(selected_nodes), total_cost
+        results[request.idx] = {
+            "selected_nodes": list(selected_nodes),
+            "cost": total_cost,
+        }
+    return results

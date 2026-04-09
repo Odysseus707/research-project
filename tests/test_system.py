@@ -3,7 +3,7 @@ import pandas as pd
 import networkx as nx
 
 from src.system import Env
-from src.random import random_env
+from src.environment_tools import random_env
 
 
 @pytest.fixture

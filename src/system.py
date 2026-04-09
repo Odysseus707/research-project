@@ -58,6 +58,8 @@ class Node:
 
 @dataclasses.dataclass
 class Request:
+    node_idx: int
+    idx: int
     timestamp: int
     included_modalities: set[T]
     calculation_type: str = "weather"  # default type
@@ -97,6 +99,7 @@ class Env:
     modalities_data_size: dict[T, float] = dataclasses.field(init=True, default=None)
     shortest_paths: dict[int, int] = dataclasses.field(init=False, default=None)
     orchestrator_idx: int = 0  # TODO: Turn this into a constant for clarity.
+    requests: list[Request] = dataclasses.field(init=True, default_factory=list)
 
     def __post_init__(self):
         # Set the modality data sizes to 1 if not set via the initializer.

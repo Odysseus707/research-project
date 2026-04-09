@@ -22,10 +22,33 @@ This project simulates a distributed network of nodes, each holding a subset of 
 - `compare_runtimes.py`: Benchmarks and plots runtimes for all methods.
 - `model.py`, `train_model.py`: Neural network model for weather prediction.
 
+
 ## How to Run
 1. Install requirements (see your environment setup).
 2. Run `python main.py` to simulate a single request.
 3. Run `python compare_runtimes.py` to benchmark all selection methods and generate a runtime comparison plot.
+
+
+## Running Unit Tests
+This project uses `pytest` for unit testing. If you are using a virtual environment (recommended), activate it first:
+
+```
+source venv/bin/activate
+```
+
+To run all tests, use:
+
+```
+venv/bin/python -m pytest -v
+```
+
+To run a specific test file (for example, `test_proposed.py`):
+
+```
+venv/bin/python -m pytest -v tests/test_proposed.py
+```
+
+This approach ensures that tests run with the correct Python environment and dependencies, and avoids PYTHONPATH issues.
 
 ## Project Idea
 Efficiently select distributed data sources (nodes) to cover all required features for a prediction task, comparing fast heuristics (greedy, random) with optimal (ILP) selection, and use the selected data for machine learning-based weather prediction.

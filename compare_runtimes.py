@@ -2,7 +2,7 @@ import time
 import matplotlib.pyplot as plt
 from network_env import networkENV
 from node import assign_data
-from ilp_solver import solve_ilp
+from src.alg.ilp_solver import solve_ilp
 
 # For reproducibility
 import random
