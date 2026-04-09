@@ -39,6 +39,26 @@ def generate_modality_mask(num_modalities, rng, decay_probs=[1.0, 0.5, 0.1, 0.01
     return mask
 
 
+def _generate_partition_masks(
+    num_nodes: int,
+    num_modalities: int,
+    rng,
+) -> dict[int, np.ndarray]:
+    masks = {
+        client: generate_modality_mask(num_modalities, rng)
+        for client in range(num_nodes)
+    }
+
+    # Ensure every modality is supported by at least one partition.
+    for modality_idx in range(num_modalities):
+        if any(mask[modality_idx] == 1 for mask in masks.values()):
+            continue
+        client_idx = int(rng.integers(num_nodes))
+        masks[client_idx][modality_idx] = 1
+
+    return masks
+
+
 def partition_dataset(
     dataset: pd.DataFrame,
     num_nodes: int,
@@ -55,19 +75,23 @@ def partition_dataset(
         for m in modalities:
             partitions[client][m] = pd.Series(dtype=float)
 
-    client_alpha = rng.dirichlet([alpha] * num_nodes)
-    for i, row in enumerate(dataset.itertuples()):
-        for m in modalities:
-            client_dir = rng.dirichlet(client_alpha)
-            client_idx = np.argmax(client_dir)
-            partitions[client_idx].loc[i, m] = getattr(row, m)
+    partition_masks = _generate_partition_masks(
+        num_nodes=num_nodes,
+        num_modalities=len(modalities),
+        rng=rng,
+    )
 
-    # Generate and apply a mask per partition
-    for client in partitions:
-        mask = generate_modality_mask(len(modalities), rng)
-        for m_idx, m in enumerate(modalities):
-            if mask[m_idx] == 0:
-                partitions[client][m] = np.nan
+    for m_idx, modality in enumerate(modalities):
+        eligible_clients = [
+            client
+            for client, mask in partition_masks.items()
+            if mask[m_idx] == 1
+        ]
+        modality_probs = rng.dirichlet([alpha] * len(eligible_clients))
+
+        for row_idx, row in enumerate(dataset.itertuples()):
+            client_idx = int(rng.choice(eligible_clients, p=modality_probs))
+            partitions[client_idx].loc[row_idx, modality] = getattr(row, modality)
 
     return partitions
 

@@ -142,19 +142,19 @@ def run_experiments() -> None:
                             "selected_nodes": selected_nodes,
                             "cost": req_result.get("cost"),
                             "qos": req_result.get("qos"),
+                            "time_taken": sim_result.get("time_taken"),
+                            "fairness_index": sim_result.get("fairness_index"),
+                            "qos_overall": sim_result.get("qos_overall"),
                         }
                     )
                 pbar.update(1)
 
-    # Save results to CSV
     csv_path = "experiment_results.csv"
     with open(csv_path, "w") as f:
-        # Write test grid and algorithms info as a header
         f.write("# Experiment Test Grid:\n")
         f.write(json.dumps(test_grid, indent=2) + "\n")
         f.write("# Algorithms Tested:\n")
         f.write(json.dumps(list(algorithms.keys()), indent=2) + "\n\n")
-        # Write CSV header and data
         pd.DataFrame(results).to_csv(f, index=False)
 
     end_time = time.time()

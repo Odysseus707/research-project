@@ -29,7 +29,11 @@ This project simulates a distributed network of nodes, each holding a subset of 
 ```
 venv/bin/python -m src.main
 ```
-3. Run `python compare_runtimes.py` to benchmark all selection methods and generate a runtime comparison plot.
+3. Generate comparison plots from `experiment_results.csv` with:
+```
+MPLCONFIGDIR=/tmp/matplotlib XDG_CACHE_HOME=/tmp/cache venv/bin/python -m src.visualize --csv-path experiment_results.csv --output-dir plots
+```
+4. Run `python compare_runtimes.py` to benchmark all selection methods and generate a runtime comparison plot.
 
 
 ## Running Unit Tests
