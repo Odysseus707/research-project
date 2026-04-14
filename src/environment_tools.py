@@ -121,47 +121,25 @@ def partition_dataset(
     return partitions
 
 
-def generate_graph(num_nodes: int, topology_type: str, seed: int = None):
+def generate_graph(
+    num_nodes: int,
+    branching_factor: int = 2,
+    seed: int = None,
+):
     if num_nodes < 1:
         raise ValueError("num_nodes must be at least 1.")
+    if branching_factor < 2:
+        raise ValueError("branching_factor must be at least 2.")
 
-    if topology_type == "star":
-        return nx.star_graph(max(0, num_nodes - 1))
-    elif topology_type == "barabasi_albert":
-        # m must be >= 1 and < num_nodes
-        m = min(2, max(1, num_nodes // 10))
-        return nx.barabasi_albert_graph(num_nodes, m, seed=seed)
-    elif topology_type == "erdos_renyi":
-        # p chosen so graph is likely connected but not complete
-        p = min(0.1 + 10 / num_nodes, 0.5)
-        return nx.erdos_renyi_graph(num_nodes, p, seed=seed)
-    elif topology_type == "m_ary_tree":
-        m = min(3, max(2, num_nodes // 20))
-        h = 0
-        graph = nx.balanced_tree(m, h)
-        while graph.number_of_nodes() < num_nodes:
-            h += 1
-            graph = nx.balanced_tree(m, h)
-        return _resize_graph(graph, num_nodes)
-    elif topology_type == "dorogovtsev_goltsev_mendes":
-        generation = 0
-        graph = nx.dorogovtsev_goltsev_mendes_graph(generation)
-        while graph.number_of_nodes() < num_nodes:
-            generation += 1
-            graph = nx.dorogovtsev_goltsev_mendes_graph(generation)
-        return _resize_graph(graph, num_nodes)
-    elif topology_type == "complete":
-        return nx.complete_graph(num_nodes)
-    elif topology_type == "balanced_tree":
-        r = min(3, max(2, num_nodes // 20))
-        h = 0
-        graph = nx.balanced_tree(r, h)
-        while graph.number_of_nodes() < num_nodes:
-            h += 1
-            graph = nx.balanced_tree(r, h)
-        return _resize_graph(graph, num_nodes)
-    else:
-        raise ValueError(f"Unknown topology_type: {topology_type}")
+    # Legacy non-tree topology branches were intentionally removed so the
+    # experiment suite always evaluates balanced trees only.
+    height = 0
+    graph = nx.balanced_tree(branching_factor, height)
+    while graph.number_of_nodes() < num_nodes:
+        height += 1
+        graph = nx.balanced_tree(branching_factor, height)
+
+    return _resize_graph(graph, num_nodes)
 
 
 def _resize_graph(graph: nx.Graph, num_nodes: int, root: int = 0) -> nx.Graph:

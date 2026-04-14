@@ -49,3 +49,59 @@ def proposed_algorithm(env: Env) -> dict:
             "modality_assignment": modality_assignment,
         }
     return results
+
+
+def _build_best_provider_lookup(env: Env) -> dict[tuple[t.Any, str], int]:
+    # Sort once by hop count so the first provider we record is the cheapest one.
+    sorted_nodes = sorted(
+        env.nodes, key=lambda node: (env.shortest_paths.get(node.idx, 1), node.idx)
+    )
+    best_provider: dict[tuple[t.Any, str], int] = {}
+
+    for node in sorted_nodes:
+        modality_columns = [
+            col for col in node.data.columns if col not in ("date", "weather")
+        ]
+        if not modality_columns:
+            continue
+
+        for row in node.data.itertuples(index=False):
+            timestamp = row.date
+            row_values = row._asdict()
+            for modality in modality_columns:
+                if row_values.get(modality) is None:
+                    continue
+                # Pandas stores missing numeric values as NaN, so `value != value`
+                # is a cheap null check that avoids repeated dataframe filtering.
+                value = row_values[modality]
+                if value != value:
+                    continue
+
+                key = (timestamp, modality)
+                if key not in best_provider:
+                    best_provider[key] = node.idx
+
+    return best_provider
+
+
+def proposed_algorithm_fast(env: Env) -> dict:
+    results = {}
+    best_provider = _build_best_provider_lookup(env)
+
+    for request in env.requests:
+        selected_nodes = set()
+        modality_assignment = {}
+
+        for modality in request.needed_modalities:
+            best_node = best_provider.get((request.timestamp, modality))
+            if best_node is None:
+                continue
+            selected_nodes.add(best_node)
+            modality_assignment[modality] = best_node
+
+        results[request.idx] = {
+            "selected_nodes": list(selected_nodes),
+            "modality_assignment": modality_assignment,
+        }
+
+    return results

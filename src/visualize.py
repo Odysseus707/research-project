@@ -11,14 +11,16 @@ import pandas as pd
 import seaborn as sns
 
 
-DEFAULT_RESULTS_PATH = Path("experiment_results.csv")
-DEFAULT_OUTPUT_DIR = Path("plots")
+RESULTS_DIR = Path("results")
+PLOTS_DIR = Path("plots")
+RESULTS_SUFFIX = "_experiment_results.csv"
 PARAM_COLUMNS = [
     "num_requests",
     "num_nodes",
     "data_uniformity",
     "seed",
     "topology_type",
+    "balanced_tree_branching_factor",
 ]
 SUMMARY_COLUMNS = PARAM_COLUMNS + [
     "algorithm",
@@ -27,46 +29,56 @@ SUMMARY_COLUMNS = PARAM_COLUMNS + [
     "successful_calculation_overall",
     "failed_calculation_count",
 ]
-ALGORITHM_ORDER = ["proposed", "random", "ilp"]
+ALGORITHM_ORDER = ["proposed", "proposed_fast", "random", "ilp"]
 ALGORITHM_LABELS = {
     "proposed": "Proposed",
+    "proposed_fast": "Proposed Fast",
     "random": "Random",
     "ilp": "ILP",
 }
 ALGORITHM_COLORS = {
     "proposed": "#1b9e77",
+    "proposed_fast": "#66a61e",
     "random": "#d95f02",
     "ilp": "#7570b3",
 }
 ALGORITHM_MARKERS = {
     "proposed": "o",
+    "proposed_fast": "D",
     "random": "s",
     "ilp": "^",
 }
 ALGORITHM_ALPHAS = {
     "proposed": 1.0,
+    "proposed_fast": 1.0,
     "random": 0.5,
     "ilp": 0.5,
 }
 
 
-def load_experiment_results(csv_path: str | Path = DEFAULT_RESULTS_PATH) -> pd.DataFrame:
-    csv_path = Path(csv_path)
-    lines = csv_path.read_text().splitlines()
-
-    header_idx = None
-    for idx, line in enumerate(lines):
-        if line.startswith("algorithm,"):
-            header_idx = idx
-            break
-
-    if header_idx is None:
-        raise ValueError(
-            f"Could not find CSV header in {csv_path}. "
-            "Expected a line starting with 'algorithm,'."
+def _find_latest_results_path() -> Path:
+    candidates = sorted(
+        RESULTS_DIR.glob(f"*{RESULTS_SUFFIX}"),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    if not candidates:
+        raise FileNotFoundError(
+            f"No experiment result files matching *{RESULTS_SUFFIX} were found in {RESULTS_DIR}."
         )
+    return candidates[0]
 
-    return pd.read_csv(csv_path, skiprows=header_idx)
+
+def _derive_output_dir(csv_path: str | Path) -> Path:
+    csv_path = Path(csv_path)
+    prefix = csv_path.name.removesuffix(RESULTS_SUFFIX)
+    return PLOTS_DIR / f"{prefix}_plots"
+
+
+def load_experiment_results(csv_path: str | Path | None = None) -> pd.DataFrame:
+    csv_path = _find_latest_results_path() if csv_path is None else Path(csv_path)
+    csv_path = Path(csv_path)
+    return pd.read_csv(csv_path)
 
 
 def ensure_output_dir(output_dir: str | Path) -> Path:
@@ -180,7 +192,7 @@ def _plot_metric_by_x(
 
 def plot_avg_cost_per_request(
     request_metrics: pd.DataFrame,
-    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    output_dir: str | Path,
     group_by: str = "num_nodes",
     filters: dict[str, object] | None = None,
 ) -> Path:
@@ -198,7 +210,7 @@ def plot_avg_cost_per_request(
 
 def plot_runtime_comparison(
     run_metrics: pd.DataFrame,
-    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    output_dir: str | Path,
     group_by: str = "num_nodes",
     filters: dict[str, object] | None = None,
 ) -> Path:
@@ -221,7 +233,7 @@ def plot_runtime_comparison(
 
 def plot_successful_calculation_comparison(
     request_metrics: pd.DataFrame,
-    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    output_dir: str | Path,
     group_by: str = "num_nodes",
     filters: dict[str, object] | None = None,
 ) -> Path:
@@ -239,7 +251,7 @@ def plot_successful_calculation_comparison(
 
 def plot_fairness_comparison(
     run_metrics: pd.DataFrame,
-    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    output_dir: str | Path,
     group_by: str = "num_nodes",
     filters: dict[str, object] | None = None,
 ) -> Path:
@@ -262,7 +274,7 @@ def plot_fairness_comparison(
 
 def plot_failed_calculation_bar(
     run_metrics: pd.DataFrame,
-    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    output_dir: str | Path,
     group_by: str = "num_nodes",
     filters: dict[str, object] | None = None,
 ) -> Path:
@@ -331,30 +343,44 @@ def _parse_filters(filter_args: Iterable[str]) -> dict[str, object]:
 
 
 def create_all_plots(
-    csv_path: str | Path = DEFAULT_RESULTS_PATH,
-    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    csv_path: str | Path | None = None,
+    output_dir: str | Path | None = None,
     group_by: str = "num_nodes",
     filters: dict[str, object] | None = None,
 ) -> list[Path]:
-    df = load_experiment_results(csv_path)
+    resolved_csv_path = _find_latest_results_path() if csv_path is None else Path(csv_path)
+    resolved_output_dir = (
+        _derive_output_dir(resolved_csv_path)
+        if output_dir is None
+        else Path(output_dir)
+    )
+    df = load_experiment_results(resolved_csv_path)
     request_metrics = prepare_request_metrics_longform(df)
     run_metrics = prepare_run_metrics_longform(df)
     created_plots = [
-        plot_avg_cost_per_request(request_metrics, output_dir, group_by, filters),
+        plot_avg_cost_per_request(
+            request_metrics, resolved_output_dir, group_by, filters
+        ),
         plot_successful_calculation_comparison(
-            request_metrics, output_dir, group_by, filters
+            request_metrics, resolved_output_dir, group_by, filters
         ),
     ]
 
     if not run_metrics.empty:
         created_plots.append(
-            plot_runtime_comparison(run_metrics, output_dir, group_by, filters)
+            plot_runtime_comparison(
+                run_metrics, resolved_output_dir, group_by, filters
+            )
         )
         created_plots.append(
-            plot_fairness_comparison(run_metrics, output_dir, group_by, filters)
+            plot_fairness_comparison(
+                run_metrics, resolved_output_dir, group_by, filters
+            )
         )
         created_plots.append(
-            plot_failed_calculation_bar(run_metrics, output_dir, group_by, filters)
+            plot_failed_calculation_bar(
+                run_metrics, resolved_output_dir, group_by, filters
+            )
         )
 
     return created_plots
@@ -366,25 +392,34 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--csv-path",
-        default=str(DEFAULT_RESULTS_PATH),
-        help="Path to the experiment results CSV file.",
+        default=None,
+        help="Path to the experiment results CSV file. Defaults to the latest file in results/.",
     )
     parser.add_argument(
         "--output-dir",
-        default=str(DEFAULT_OUTPUT_DIR),
-        help="Directory where plot images will be written.",
+        default=None,
+        help="Directory where plot images will be written. Defaults to plots/foo_plots matching the CSV.",
     )
     parser.add_argument(
         "--group-by",
         default="num_nodes",
-        choices=["num_requests", "num_nodes", "data_uniformity", "seed"],
+        choices=[
+            "num_requests",
+            "num_nodes",
+            "data_uniformity",
+            "seed",
+            "balanced_tree_branching_factor",
+        ],
         help="Parameter to place on the x-axis.",
     )
     parser.add_argument(
         "--filter",
         action="append",
         default=[],
-        help="Restrict plots to matching rows, for example --filter topology_type=star.",
+        help=(
+            "Restrict plots to matching rows, for example "
+            "--filter balanced_tree_branching_factor=2."
+        ),
     )
     return parser
 

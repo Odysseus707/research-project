@@ -2,7 +2,7 @@ import pytest
 import pandas as pd
 import networkx as nx
 from src.environment_tools import get_modalities_at_timestamp, random_env
-from src.alg.proposed import proposed_algorithm
+from src.alg.proposed import proposed_algorithm, proposed_algorithm_fast
 
 
 @pytest.fixture
@@ -29,3 +29,13 @@ def test_proposed_algorithm(dataset):
             assert node_idx in res["selected_nodes"]
             node = next(node for node in env.nodes if node.idx == node_idx)
             assert modality in get_modalities_at_timestamp(node, request.timestamp)
+
+
+def test_proposed_algorithm_fast_matches_proposed(dataset):
+    tree = nx.star_graph(10)
+    env = random_env(dataset, tree, seed=42)
+
+    original_output = proposed_algorithm(env)
+    fast_output = proposed_algorithm_fast(env)
+
+    assert fast_output == original_output
