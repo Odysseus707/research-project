@@ -28,7 +28,7 @@ def test_partition_dataset_respects_modality_support():
 
 def test_partition_dataset_can_create_duplicates():
     dataset = pd.read_csv("seattle-weather.csv").head(25)
-    partitions = partition_dataset(dataset, num_nodes=4, seed=123)
+    partitions = partition_dataset(dataset, num_nodes=4, duplicate_prob=0.35, seed=123)
     modalities = [col for col in dataset.columns if col not in ("date", "weather")]
 
     duplicate_count = 0
@@ -40,3 +40,16 @@ def test_partition_dataset_can_create_duplicates():
         duplicate_count += assigned_count - original_count
 
     assert duplicate_count > 0
+
+
+def test_partition_dataset_can_disable_duplicates():
+    dataset = pd.read_csv("seattle-weather.csv").head(25)
+    partitions = partition_dataset(dataset, num_nodes=4, duplicate_prob=0.0, seed=123)
+    modalities = [col for col in dataset.columns if col not in ("date", "weather")]
+
+    for modality in modalities:
+        original_count = dataset[modality].notna().sum()
+        assigned_count = sum(
+            partition[modality].notna().sum() for partition in partitions.values()
+        )
+        assert assigned_count == original_count

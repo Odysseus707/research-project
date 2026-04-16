@@ -36,6 +36,10 @@ class TestSimulate(unittest.TestCase):
             self.assertIsInstance(res["missing_modalities"], list)
 
             expected_cost = 0.0
+            expected_cost += sum(
+                self.env.node_activation_costs.get(node_idx, 1.0)
+                for node_idx in set(res["modality_assignment"].values())
+            )
             for modality in request.needed_modalities:
                 node_idx = res["modality_assignment"].get(modality)
                 if node_idx is None:

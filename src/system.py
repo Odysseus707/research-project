@@ -107,6 +107,9 @@ class Env:
     modalities: list[T] = dataclasses.field(init=True, repr=False)
     # Additional arguments below.
     modalities_data_size: dict[T, float] = dataclasses.field(init=True, default=None)
+    node_activation_costs: dict[int, float] = dataclasses.field(
+        init=True, default=None
+    )
     shortest_paths: dict[int, int] = dataclasses.field(init=False, default=None)
     orchestrator_idx: int = 0  # TODO: Turn this into a constant for clarity.
     requests: list[Request] = dataclasses.field(init=True, default_factory=list)
@@ -117,6 +120,11 @@ class Env:
             self.modalities_data_size = {}
             for m in self.modalities:
                 self.modalities_data_size[m] = 1.0
+
+        if self.node_activation_costs is None:
+            self.node_activation_costs = {}
+            for node in self.nodes:
+                self.node_activation_costs[node.idx] = 1.0
 
         # Pre-compute the shortest paths.
         self.shortest_paths = {}

@@ -17,7 +17,7 @@ import pandas as pd
 from tqdm import tqdm
 from src.environment_tools import random_env, simulate, generate_graph
 from src.alg.proposed import proposed_algorithm, proposed_algorithm_fast
-from src.alg.random_select import random_algorithm
+from src.alg.random_select import random_algorithm, random_select_fast
 from src.alg.ilp_solver import solve_ilp
 import json
 import time
@@ -33,7 +33,9 @@ df = pd.read_csv(DATA_PATH)
 test_grid = {
     "num_requests_per_node": [10, 100],
     "num_nodes": [10, 20, 50, 100, 200],
-    "data_uniformity": [1, 1e2, 1e5],
+    "data_uniformity": [1, 1e5],
+    "duplicate_prob": [0.15, 0.35, 0.60],
+    "node_activation_cost": [0.0, 1.0, 3.0, 5.0],
     "seed": list(range(1, 2)),
     "balanced_tree_branching_factor": [2, 10],
 }
@@ -44,6 +46,7 @@ algorithms = {
     "proposed": proposed_algorithm,
     "proposed_fast": proposed_algorithm_fast,
     "random": random_algorithm,
+    "random_select_fast": random_select_fast,
     "ilp": solve_ilp,
 }
 algorithm_order = {name: idx for idx, name in enumerate(algorithms.keys())}
@@ -59,6 +62,8 @@ def _run_experiment(
     num_requests: int,
     num_nodes: int,
     alpha: float,
+    duplicate_prob: float,
+    node_activation_cost: float,
     seed: int,
     balanced_tree_branching_factor: int,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
@@ -67,7 +72,14 @@ def _run_experiment(
         branching_factor=balanced_tree_branching_factor,
         seed=seed,
     )
-    env = random_env(df, graph, alpha=alpha, seed=seed)
+    env = random_env(
+        df,
+        graph,
+        alpha=alpha,
+        node_activation_cost=node_activation_cost,
+        duplicate_prob=duplicate_prob,
+        seed=seed,
+    )
     env.requests = env.requests[: num_requests * num_nodes]
     request_rows = [
         {
@@ -94,6 +106,8 @@ def run_experiments() -> None:
         len(test_grid["num_requests_per_node"])
         * len(test_grid["num_nodes"])
         * len(test_grid["data_uniformity"])
+        * len(test_grid["duplicate_prob"])
+        * len(test_grid["node_activation_cost"])
         * len(test_grid["seed"])
         * len(test_grid["balanced_tree_branching_factor"])
     )
@@ -101,7 +115,7 @@ def run_experiments() -> None:
     start_time = time.time()
     futures = {}
 
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ProcessPoolExecutor(max_workers=8) as executor:
         with tqdm(
             total=total_jobs,
             desc="Running Experiments",
@@ -113,31 +127,41 @@ def run_experiments() -> None:
             for num_requests in test_grid["num_requests_per_node"]:
                 for num_nodes in test_grid["num_nodes"]:
                     for alpha in test_grid["data_uniformity"]:
-                        for seed in test_grid["seed"]:
-                            for balanced_tree_branching_factor in test_grid[
-                                "balanced_tree_branching_factor"
+                        for duplicate_prob in test_grid["duplicate_prob"]:
+                            for node_activation_cost in test_grid[
+                                "node_activation_cost"
                             ]:
-                                future = executor.submit(
-                                    _run_experiment,
-                                    num_requests,
-                                    num_nodes,
-                                    alpha,
-                                    seed,
-                                    balanced_tree_branching_factor,
-                                )
-                                futures[future] = (
-                                    num_requests,
-                                    num_nodes,
-                                    alpha,
-                                    seed,
-                                    balanced_tree_branching_factor,
-                                )
+                                for seed in test_grid["seed"]:
+                                    for balanced_tree_branching_factor in test_grid[
+                                        "balanced_tree_branching_factor"
+                                    ]:
+                                        future = executor.submit(
+                                            _run_experiment,
+                                            num_requests,
+                                            num_nodes,
+                                            alpha,
+                                            duplicate_prob,
+                                            node_activation_cost,
+                                            seed,
+                                            balanced_tree_branching_factor,
+                                        )
+                                        futures[future] = (
+                                            num_requests,
+                                            num_nodes,
+                                            alpha,
+                                            duplicate_prob,
+                                            node_activation_cost,
+                                            seed,
+                                            balanced_tree_branching_factor,
+                                        )
 
             for future in as_completed(futures):
                 (
                     num_requests,
                     num_nodes,
                     alpha,
+                    duplicate_prob,
+                    node_activation_cost,
                     seed,
                     balanced_tree_branching_factor,
                 ) = futures[future]
@@ -154,6 +178,8 @@ def run_experiments() -> None:
                                 "num_requests": num_requests,
                                 "num_nodes": num_nodes,
                                 "data_uniformity": alpha,
+                                "duplicate_prob": duplicate_prob,
+                                "node_activation_cost": node_activation_cost,
                                 "seed": seed,
                                 "topology_type": TOPOLOGY_TYPE,
                                 "balanced_tree_branching_factor": (
@@ -199,6 +225,8 @@ def run_experiments() -> None:
                 "num_requests",
                 "num_nodes",
                 "data_uniformity",
+                "duplicate_prob",
+                "node_activation_cost",
                 "seed",
                 "topology_type",
                 "balanced_tree_branching_factor",

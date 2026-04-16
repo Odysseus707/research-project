@@ -18,6 +18,8 @@ PARAM_COLUMNS = [
     "num_requests",
     "num_nodes",
     "data_uniformity",
+    "duplicate_prob",
+    "node_activation_cost",
     "seed",
     "topology_type",
     "balanced_tree_branching_factor",
@@ -29,29 +31,33 @@ SUMMARY_COLUMNS = PARAM_COLUMNS + [
     "successful_calculation_overall",
     "failed_calculation_count",
 ]
-ALGORITHM_ORDER = ["proposed", "proposed_fast", "random", "ilp"]
+ALGORITHM_ORDER = ["proposed", "proposed_fast", "random", "random_select_fast", "ilp"]
 ALGORITHM_LABELS = {
     "proposed": "Proposed",
     "proposed_fast": "Proposed Fast",
     "random": "Random",
+    "random_select_fast": "Random Fast",
     "ilp": "ILP",
 }
 ALGORITHM_COLORS = {
     "proposed": "#1b9e77",
     "proposed_fast": "#66a61e",
     "random": "#d95f02",
+    "random_select_fast": "#e7298a",
     "ilp": "#7570b3",
 }
 ALGORITHM_MARKERS = {
     "proposed": "o",
     "proposed_fast": "D",
     "random": "s",
+    "random_select_fast": "P",
     "ilp": "^",
 }
 ALGORITHM_ALPHAS = {
     "proposed": 1.0,
     "proposed_fast": 1.0,
     "random": 0.5,
+    "random_select_fast": 0.8,
     "ilp": 0.5,
 }
 
@@ -88,13 +94,14 @@ def ensure_output_dir(output_dir: str | Path) -> Path:
 
 
 def prepare_request_metrics_longform(df: pd.DataFrame) -> pd.DataFrame:
+    available_param_columns = [column for column in PARAM_COLUMNS if column in df.columns]
     success_column = (
         "successful_calculation"
         if "successful_calculation" in df.columns
         else "qos"
     )
     return (
-        df[PARAM_COLUMNS + ["algorithm", "request_idx", "cost", success_column]]
+        df[available_param_columns + ["algorithm", "request_idx", "cost", success_column]]
         .rename(
             columns={
                 "cost": "avg_cost_per_request",
@@ -106,8 +113,18 @@ def prepare_request_metrics_longform(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def prepare_run_metrics_longform(df: pd.DataFrame) -> pd.DataFrame:
+    available_param_columns = [column for column in PARAM_COLUMNS if column in df.columns]
     available_summary_columns = [
-        column for column in SUMMARY_COLUMNS if column in df.columns
+        column
+        for column in available_param_columns
+        + [
+            "algorithm",
+            "time_taken",
+            "fairness_index",
+            "successful_calculation_overall",
+            "failed_calculation_count",
+        ]
+        if column in df.columns
     ]
     missing = {
         "time_taken",
@@ -151,6 +168,7 @@ def _plot_metric_by_x(
     title: str,
     ylabel: str,
     filters: dict[str, object] | None = None,
+    log_y: bool = False,
 ) -> Path:
     plot_df = df.copy()
     if filters:
@@ -183,6 +201,8 @@ def _plot_metric_by_x(
     ax.set_title(title)
     ax.set_xlabel(x_column.replace("_", " ").title())
     ax.set_ylabel(ylabel)
+    if log_y:
+        ax.set_yscale("log")
     _apply_algorithm_style(ax)
     fig.tight_layout()
     fig.savefig(output_path, dpi=200)
@@ -226,8 +246,9 @@ def plot_runtime_comparison(
         y_column="avg_time_taken",
         output_path=output_path,
         title="Average Runtime Per Experiment",
-        ylabel="Time Taken (seconds)",
+        ylabel="Time Taken (seconds, log scale)",
         filters=filters,
+        log_y=True,
     )
 
 
@@ -407,6 +428,8 @@ def build_parser() -> argparse.ArgumentParser:
             "num_requests",
             "num_nodes",
             "data_uniformity",
+            "duplicate_prob",
+            "node_activation_cost",
             "seed",
             "balanced_tree_branching_factor",
         ],

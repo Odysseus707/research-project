@@ -1,64 +1,97 @@
 from __future__ import annotations
 
 import typing as t
+
 from src.environment_tools import get_modalities_at_timestamp
 from src.system import Env
 
 
 def cost(hops: int, weight_m: float) -> float:
-    """The total cost of completing a data transfer.
-
-    Args:
-        hops (int): The number of hops needed to transfer the modality from its source to the cloud.
-        weight_m (float): The data size of this modality (i.e., cost for one hop).
-
-    Returns:
-        The total cost of completing a transfer.
-    """
+    """The total transfer cost of completing a modality transfer."""
     return hops * weight_m
 
 
-def proposed_algorithm(env: Env) -> dict:
+def _select_greedy_with_activation_cost(
+    env: Env,
+    availability_by_request: dict[t.Any, dict[int, set[str]]],
+) -> dict:
     results = {}
+
     for request in env.requests:
-        needed = request.needed_modalities
+        remaining = set(request.needed_modalities)
         selected_nodes = set()
         modality_assignment = {}
-        available_modalities_by_node = {
-            node.idx: get_modalities_at_timestamp(node, request.timestamp)
-            for node in env.nodes
-        }
-        for modality in needed:
+        available_modalities_by_node = availability_by_request[request.idx]
+
+        while remaining:
             best_node = None
-            best_cost = float("inf")
+            best_cover: set[str] = set()
+            best_ratio = float("inf")
+            best_incremental_cost = float("inf")
+
             for node in env.nodes:
-                present_modalities = available_modalities_by_node[node.idx]
-                if modality not in present_modalities:
+                cover = remaining & available_modalities_by_node.get(node.idx, set())
+                if not cover:
                     continue
-                hops = env.shortest_paths.get(node.idx, 1)
-                w = env.modalities_data_size.get(modality, 1.0)
-                c = hops * w
-                if c < best_cost:
-                    best_cost = c
+
+                incremental_cost = sum(
+                    cost(
+                        env.shortest_paths.get(node.idx, 1),
+                        env.modalities_data_size.get(modality, 1.0),
+                    )
+                    for modality in cover
+                )
+                if node.idx not in selected_nodes:
+                    incremental_cost += env.node_activation_costs.get(node.idx, 1.0)
+
+                ratio = incremental_cost / len(cover)
+                if best_node is None or (
+                    ratio,
+                    incremental_cost,
+                    node.idx,
+                ) < (
+                    best_ratio,
+                    best_incremental_cost,
+                    best_node,
+                ):
                     best_node = node.idx
-            if best_node is not None:
-                selected_nodes.add(best_node)
+                    best_cover = cover
+                    best_ratio = ratio
+                    best_incremental_cost = incremental_cost
+
+            if best_node is None:
+                break
+
+            selected_nodes.add(best_node)
+            for modality in sorted(best_cover):
                 modality_assignment[modality] = best_node
+            remaining -= best_cover
+
         results[request.idx] = {
             "selected_nodes": list(selected_nodes),
             "modality_assignment": modality_assignment,
         }
+
     return results
 
 
-def _build_best_provider_lookup(env: Env) -> dict[tuple[t.Any, str], int]:
-    # Sort once by hop count so the first provider we record is the cheapest one.
-    sorted_nodes = sorted(
-        env.nodes, key=lambda node: (env.shortest_paths.get(node.idx, 1), node.idx)
-    )
-    best_provider: dict[tuple[t.Any, str], int] = {}
+def proposed_algorithm(env: Env) -> dict:
+    availability_by_request = {
+        request.idx: {
+            node.idx: get_modalities_at_timestamp(node, request.timestamp)
+            for node in env.nodes
+        }
+        for request in env.requests
+    }
+    return _select_greedy_with_activation_cost(env, availability_by_request)
 
-    for node in sorted_nodes:
+
+def _build_timestamp_availability_lookup(
+    env: Env,
+) -> dict[t.Any, dict[int, set[str]]]:
+    availability_by_timestamp: dict[t.Any, dict[int, set[str]]] = {}
+
+    for node in env.nodes:
         modality_columns = [
             col for col in node.data.columns if col not in ("date", "weather")
         ]
@@ -68,40 +101,27 @@ def _build_best_provider_lookup(env: Env) -> dict[tuple[t.Any, str], int]:
         for row in node.data.itertuples(index=False):
             timestamp = row.date
             row_values = row._asdict()
-            for modality in modality_columns:
-                if row_values.get(modality) is None:
-                    continue
-                # Pandas stores missing numeric values as NaN, so `value != value`
-                # is a cheap null check that avoids repeated dataframe filtering.
-                value = row_values[modality]
-                if value != value:
-                    continue
+            present_modalities = {
+                modality
+                for modality in modality_columns
+                if row_values[modality] == row_values[modality]
+            }
+            availability_by_timestamp.setdefault(timestamp, {})[node.idx] = (
+                present_modalities
+            )
 
-                key = (timestamp, modality)
-                if key not in best_provider:
-                    best_provider[key] = node.idx
-
-    return best_provider
+    return availability_by_timestamp
 
 
 def proposed_algorithm_fast(env: Env) -> dict:
-    results = {}
-    best_provider = _build_best_provider_lookup(env)
-
-    for request in env.requests:
-        selected_nodes = set()
-        modality_assignment = {}
-
-        for modality in request.needed_modalities:
-            best_node = best_provider.get((request.timestamp, modality))
-            if best_node is None:
-                continue
-            selected_nodes.add(best_node)
-            modality_assignment[modality] = best_node
-
-        results[request.idx] = {
-            "selected_nodes": list(selected_nodes),
-            "modality_assignment": modality_assignment,
+    availability_by_timestamp = _build_timestamp_availability_lookup(env)
+    availability_by_request = {
+        request.idx: {
+            node.idx: availability_by_timestamp.get(request.timestamp, {}).get(
+                node.idx, set()
+            )
+            for node in env.nodes
         }
-
-    return results
+        for request in env.requests
+    }
+    return _select_greedy_with_activation_cost(env, availability_by_request)

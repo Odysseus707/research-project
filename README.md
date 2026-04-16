@@ -86,7 +86,7 @@ rm -rf /home/cc/your_project_folder
 
 Now if you want to upload your files, from the local machine run this on the local machine (not server side):
 
-rsync -av --exclude-from='.gitignore' -e "ssh -i /Users/vivekrai/Downloads/key.pem" . cc@129.114.109.220:/home/cc/your_project_folder
+rsync -av --exclude-from='.gitignore' --exclude='plots/' --exclude='results/' -e "ssh -i /Users/vivekrai/Downloads/key.pem" . cc@129.114.109.220:/home/cc/your_project_folder
 
 Then run this to craete venv, and download all modules from requirements.txt:
 
@@ -98,8 +98,15 @@ pip install -r requirements.txt
 
 To save stuff like outputs from server to local, run this on local:
 
-scp -i /Users/vivekrai/Downloads/key.pem -r cc@129.114.109.220:/home/cc/your_project_folder/plots "/Users/vivekrai/Desktop/CS597 S2/Prototype"
+# scp -i /Users/vivekrai/Downloads/key.pem -r cc@129.114.109.220:/home/cc/your_project_folder/plots "/Users/vivekrai/Desktop/CS597 S2/Prototype"
 
+CSV:
+
+scp -i /Users/vivekrai/Downloads/key.pem "cc@129.114.109.220:/home/cc/your_project_folder/results/*" "/Users/vivekrai/Desktop/CS597 S2/Prototype/results/"
+
+Plots:
+
+scp -i /Users/vivekrai/Downloads/key.pem -r "cc@129.114.109.220:/home/cc/your_project_folder/plots/*" "/Users/vivekrai/Desktop/CS597 S2/Prototype/plots/"
 
 ## Project Idea
 Efficiently select distributed data sources (nodes) to cover all required features for a prediction task, comparing fast heuristics (greedy, random) with optimal (ILP) selection, and use the selected data for machine learning-based weather prediction.

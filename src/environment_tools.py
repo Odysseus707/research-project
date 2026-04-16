@@ -77,6 +77,7 @@ def partition_dataset(
     dataset: pd.DataFrame,
     num_nodes: int,
     alpha: float = 1e5,
+    duplicate_prob: float = 0.35,
     # time_alpha: float,
     # modality_alpha: float,
     seed: Generator | int | None = None,
@@ -84,7 +85,6 @@ def partition_dataset(
     rng = create_rng(seed)
     modalities = [col for col in dataset.columns if col not in ("date", "weather")]
     partitions = {client: pd.DataFrame(dataset["date"]) for client in range(num_nodes)}
-    duplicate_prob = 0.35
 
     for client in partitions:
         for m in modalities:
@@ -211,6 +211,8 @@ def random_env(
     dataset: pd.DataFrame,
     graph: nx.Graph,
     alpha: float = 1e5,
+    node_activation_cost: float = 1.0,
+    duplicate_prob: float = 0.35,
     seed: Generator | int | None = None,
 ) -> Env:
     rng = create_rng(seed)
@@ -229,7 +231,11 @@ def random_env(
         )
 
     node_partitioned_data = partition_dataset(
-        dataset, num_nodes=num_workers, alpha=alpha
+        dataset,
+        num_nodes=num_workers,
+        alpha=alpha,
+        duplicate_prob=duplicate_prob,
+        seed=rng,
     )
 
     worker_id_to_dataset_id = {
@@ -265,6 +271,7 @@ def random_env(
         topo=tree,
         timestamps=timestamps,
         modalities=modalities,
+        node_activation_costs={worker.idx: node_activation_cost for worker in workers},
     )
     env.requests = generate_request(env)
     return env
@@ -281,7 +288,8 @@ def compute_cost(
 
     This is designed to match the ILP objective as closely as possible:
     each needed modality is charged exactly once, using the node that is
-    assigned to provide that modality.
+    assigned to provide that modality, and each selected node pays a one-time
+    activation cost.
 
     Example:
     If a request needs {"wind", "temp_max"} and the assignment is
@@ -300,6 +308,10 @@ def compute_cost(
 
     total_cost = 0.0
     if modality_assignment:
+        activated_nodes = {node_idx for node_idx in modality_assignment.values()}
+        total_cost += sum(
+            env.node_activation_costs.get(node_idx, 1.0) for node_idx in activated_nodes
+        )
         for modality in request.needed_modalities:
             node_idx = modality_assignment.get(modality)
             if node_idx is None:
@@ -313,6 +325,9 @@ def compute_cost(
         return total_cost
 
     selected_node_ids = set(selected_nodes)
+    total_cost += sum(
+        env.node_activation_costs.get(node_idx, 1.0) for node_idx in selected_node_ids
+    )
     for modality in request.needed_modalities:
         best_cost = None
         for node in env.nodes:
