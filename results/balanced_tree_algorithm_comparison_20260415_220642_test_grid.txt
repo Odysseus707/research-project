@@ -1,0 +1,38 @@
+Experiment Test Grid
+{
+  "num_requests_per_node": [
+    10,
+    100
+  ],
+  "num_nodes": [
+    10,
+    20,
+    50,
+    100,
+    200
+  ],
+  "data_uniformity": [
+    1,
+    100.0,
+    100000.0
+  ],
+  "seed": [
+    1
+  ],
+  "balanced_tree_branching_factor": [
+    2,
+    5,
+    10
+  ],
+  "topology_type": "balanced_tree",
+  "node_activation_cost": 1.0
+}
+
+Algorithms Tested
+[
+  "proposed",
+  "proposed_fast",
+  "random",
+  "random_select_fast",
+  "ilp"
+]

@@ -218,5 +218,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Experiment results (do not track in git)
+# Experiment results
 results/
+!results/
+results/*.csv
+!results/*.txt

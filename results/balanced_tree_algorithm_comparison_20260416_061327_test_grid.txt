@@ -1,0 +1,57 @@
+Experiment Test Grid
+{
+  "num_requests_per_node": [
+    10
+  ],
+  "num_nodes": [
+    10,
+    20,
+    50,
+    100,
+    200
+  ],
+  "data_uniformity": [
+    1,
+    100000.0
+  ],
+  "duplicate_prob": [
+    0.15,
+    0.35,
+    0.6
+  ],
+  "node_activation_cost": [
+    0.0,
+    1.0,
+    3.0,
+    5.0
+  ],
+  "seed": [
+    1
+  ],
+  "balanced_tree_branching_factor": [
+    2,
+    10
+  ],
+  "topology_type": "balanced_tree",
+  "dataset_path": "dataset/multicity_weather_imputed.csv",
+  "dataset_cities": [
+    "Seattle",
+    "Portland",
+    "Vancouver",
+    "San Francisco",
+    "Chicago",
+    "New York",
+    "Boston",
+    "Houston"
+  ],
+  "dataset_row_limit": 1000
+}
+
+Algorithms Tested
+[
+  "proposed",
+  "proposed_fast",
+  "random",
+  "random_select_fast",
+  "ilp"
+]
